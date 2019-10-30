@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <style>
+        table, tr, th, td {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div th:include="header :: header"></div>
+
+    <div>
+        TotalCount : <span th:text="${totalcount}">0</span>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Seq</th>
+            <th>Name</th>
+            <th>Grade</th>
+            <th>Age</th>
+            <th>Hobby</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${list}">
+            <td th:text="${student.seq}"></td>
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.grade}"></td>
+            <td th:text="${student.age}"></td>
+            <td th:text="${student.hobby}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:include="footer :: footer"></div>
+</body>
+</html>

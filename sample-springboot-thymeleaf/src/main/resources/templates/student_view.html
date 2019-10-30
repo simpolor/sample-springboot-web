@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student View</title>
+    <style>
+        table, tr, th, td {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div th:include="header :: header"></div>
+
+    <h1>Student View</h1>
+
+    <div>
+        <p>Seq : <span th:text="${student.seq}"></span></p>
+        <p>Name : <span th:text="${student.age}"></span></p>
+        <p>Grade : <span th:text="${student.grade}"></span></p>
+        <p>Age : <span th:text="${student.age}"></span></p>
+        <p>Hobby : <span th:text="${student.hobby}"></span></p>
+    </div>
+
+    <hr />
+
+    <div th:object="${student}">
+        <p>Seq : <span th:text="*{seq}">1</span></p>
+        <p>Name : <span th:text="*{age}"></span></p>
+        <p>Grade : <span th:text="*{grade}"></span></p>
+        <p>Age : <span th:text="*{age}"></span></p>
+        <p>Hobby : <span th:text="*{hobby}"></span></p>
+    </div>
+
+    <div th:include="footer :: footer"></div>
+</body>
+</html>
