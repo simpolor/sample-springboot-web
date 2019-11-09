@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Student View</title>
+    <script>
+        function f_modify(seq) {
+            location.href = '/student/modify/'+seq;
+        }
+
+        function f_delete() {
+            document.getElementById("deleteForm").submit();
+        }
+
+        function f_list() {
+            location.href = '/student/list';
+        }
+
+    </script>
     <style>
         table, tr, th, td {
             border: 1px solid #000;
@@ -14,24 +28,34 @@
 
     <h1>Student View</h1>
 
-    <div>
-        <p>Seq : <span th:text="${student.seq}"></span></p>
-        <p>Name : <span th:text="${student.age}"></span></p>
-        <p>Grade : <span th:text="${student.grade}"></span></p>
-        <p>Age : <span th:text="${student.age}"></span></p>
-        <p>Hobby : <span th:text="${student.hobby}"></span></p>
-    </div>
+    <form th:id="deleteForm" th:action="@{/student/delete}" th:method="post">
+        <input th:type="hidden" th:name="seq" th:value="${student.seq}" />
+
+        <div>
+            <p>Seq : <span th:text="${student.seq}"></span></p>
+            <p>Name : <span th:text="${student.name}"></span></p>
+            <p>Grade : <span th:text="${student.grade}"></span></p>
+            <p>Age : <span th:text="${student.age}"></span></p>
+            <p>Hobby : <span th:text="${student.hobby}"></span></p>
+        </div>
+
+        <hr />
+
+        <div th:object="${student}">
+            <p>Seq : <span th:text="*{seq}">1</span></p>
+            <p>Name : <span th:text="*{age}"></span></p>
+            <p>Grade : <span th:text="*{grade}"></span></p>
+            <p>Age : <span th:text="*{age}"></span></p>
+            <p>Hobby : <span th:text="*{hobby}"></span></p>
+        </div>
+    </form>
 
     <hr />
-
-    <div th:object="${student}">
-        <p>Seq : <span th:text="*{seq}">1</span></p>
-        <p>Name : <span th:text="*{age}"></span></p>
-        <p>Grade : <span th:text="*{grade}"></span></p>
-        <p>Age : <span th:text="*{age}"></span></p>
-        <p>Hobby : <span th:text="*{hobby}"></span></p>
-    </div>
+    <button th:onclick="'f_modify('+${student.seq}+')'">수정</button>
+    <button th:onclick="f_delete()">삭제</button>
+    <button th:onclick="f_list()">목록</button>
 
     <div th:include="footer :: footer"></div>
+
 </body>
 </html>

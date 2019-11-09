@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Student List</title>
+    <script>
+        function f_write() {
+            document.getElementById("writeForm").submit();
+        }
+    </script>
     <style>
         table, tr, th, td {
             border: 1px solid #000;
@@ -10,32 +15,23 @@
     </style>
 </head>
 <body>
-    <div th:include="header :: header"></div>
+<div th:include="header :: header"></div>
 
-    <div>
-        TotalCount : <span th:text="${totalcount}">0</span>
-    </div>
+    <h1>Student Write</h1>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Seq</th>
-            <th>Name</th>
-            <th>Grade</th>
-            <th>Age</th>
-            <th>Hobby</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${list}">
-            <td th:text="${student.seq}"></td>
-            <td th:text="${student.name}"></td>
-            <td th:text="${student.grade}"></td>
-            <td th:text="${student.age}"></td>
-            <td th:text="${student.hobby}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <form th:id="writeForm" th:action="@{/student/write}" th:method="post">
+        <div>
+            <p>Name : <input th:name="name" /></p>
+            <p>Grade : <input th:name="grade" /></p>
+            <p>Age : <input th:name="age" /></p>
+            <p>Hobby : <input th:name="hobby" /></p>
+        </div>
+
+        <hr />
+    </form>
+
+    <button th:onclick="'f_write()'">등록</button>
+    <button th:onclick="history.back()">뒤로</button>
 
     <div th:include="footer :: footer"></div>
 </body>

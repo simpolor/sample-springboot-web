@@ -1,17 +1,18 @@
 package io.simpolor.thymeleaf.controller;
 
 import io.simpolor.thymeleaf.domain.Student;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
+@Slf4j
 @Controller
-@RequestMapping("/student")
 public class StudentController {
 
-	@RequestMapping(value="")
+	@RequestMapping(value="/student")
 	public ModelAndView student(ModelAndView mav) {
 
 		List<String> classRoomList = new ArrayList<>();
@@ -43,7 +44,7 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/list")
+	@RequestMapping(value="/student/list")
 	public ModelAndView studentList(ModelAndView mav) {
 
 		List<Student> students = new ArrayList<>();
@@ -60,8 +61,10 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/view/{seq}", method=RequestMethod.GET)
+	@RequestMapping(value="/student/view/{seq}", method=RequestMethod.GET)
 	public ModelAndView studentView(ModelAndView mav, @PathVariable long seq) {
+
+		log.info("student view seq : {}", seq);
 
 		Student student = new Student(seq, "단순색", 1, 17, Arrays.asList("축구"));
 
@@ -71,25 +74,31 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public ModelAndView studentRegister(ModelAndView mav) {
+	@RequestMapping(value="/student/write", method=RequestMethod.GET)
+	public ModelAndView studentWrite(ModelAndView mav) {
+
+		log.info("student write");
 
 		mav.setViewName("student_write");
 
 		return mav;
 	}
 
-	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public ModelAndView studentRegister(ModelAndView mav, Student student) {
+	@RequestMapping(value="/student/write", method=RequestMethod.POST)
+	public ModelAndView studentWrite(ModelAndView mav, Student student) {
+
+		log.info("student write : {}", student);
 
 		mav.addObject("student", student);
-		mav.setViewName("redirect:/student/view/"+student.getSeq());
+		mav.setViewName("redirect:/student/view/1");
 
 		return mav;
 	}
 
-	@RequestMapping(value="/modify/{seq}", method=RequestMethod.GET)
+	@RequestMapping(value="/student/modify/{seq}", method=RequestMethod.GET)
 	public ModelAndView studentModify(ModelAndView mav, @PathVariable long seq) {
+
+		log.info("student modify seq : {}", seq);
 
 		Student student = new Student(seq, "단순색", 1, 17, Arrays.asList("축구"));
 
@@ -99,8 +108,10 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	@RequestMapping(value="/student/modify", method=RequestMethod.POST)
 	public ModelAndView studentModify(ModelAndView mav, Student student) {
+
+		log.info("student modify : {}", student);
 
 		mav.addObject("student", student);
 		mav.setViewName("redirect:/student/view/"+student.getSeq());
@@ -108,8 +119,10 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/{seq}", method=RequestMethod.POST)
-	public ModelAndView studentDelete(ModelAndView mav, @PathVariable long seq) {
+	@RequestMapping(value="/student/delete", method=RequestMethod.POST)
+	public ModelAndView studentDelete(ModelAndView mav, @RequestParam("seq") long seq) {
+
+		log.info("student delete seq : {}", seq);
 
 		mav.setViewName("redirect:/student/list");
 

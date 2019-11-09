@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Student List</title>
+    <script>
+        function f_write() {
+            location.href = '/student/write';
+        }
+    </script>
     <style>
         table, tr, th, td {
             border: 1px solid #000;
@@ -38,6 +43,10 @@
             </tr>
         </tbody>
     </table>
+
+
+    <hr />
+    <button th:onclick="f_write()">등록</button>
 
     <div th:include="footer :: footer"></div>
 </body>

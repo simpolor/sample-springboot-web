@@ -2,7 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Student List</title>
+    <title>Student Modify</title>
+    <script>
+        function f_modify() {
+            document.getElementById("modifyForm").submit();
+        }
+    </script>
     <style>
         table, tr, th, td {
             border: 1px solid #000;
@@ -12,30 +17,23 @@
 <body>
     <div th:include="header :: header"></div>
 
-    <div>
-        TotalCount : <span th:text="${totalcount}">0</span>
-    </div>
+    <h1>Student Modify</h1>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Seq</th>
-            <th>Name</th>
-            <th>Grade</th>
-            <th>Age</th>
-            <th>Hobby</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${list}">
-            <td th:text="${student.seq}"></td>
-            <td th:text="${student.name}"></td>
-            <td th:text="${student.grade}"></td>
-            <td th:text="${student.age}"></td>
-            <td th:text="${student.hobby}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <form th:id="modifyForm" th:action="@{/student/modify}" th:method="post">
+        <input th:type="hidden" th:name="seq" th:value="${student.seq}" />
+
+        <div>
+            <p>Name : <input th:name="name" th:value="${student.name}" /></p>
+            <p>Grade : <input th:name="grade" th:value="${student.grade}" /></p>
+            <p>Age : <input th:name="age" th:value="${student.age}" /></p>
+            <p>Hobby : <input th:name="hobby" th:value="${student.hobby}" /></p>
+        </div>
+
+        <hr />
+    </form>
+
+    <button th:onclick="'f_modify('+${student.seq}+')'">수정</button>
+    <button th:onclick="history.back()">뒤로</button>
 
     <div th:include="footer :: footer"></div>
 </body>
