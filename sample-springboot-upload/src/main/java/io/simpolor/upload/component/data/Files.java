@@ -1,15 +1,18 @@
-package io.simpolor.upload.domain;
+package io.simpolor.upload.component.data;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class Result {
+public class Files {
 
-    private String name;
     private String orgFileName;
+
     private String savedFileName;
-    private String fileExt;
+
     private long fileSize;
+
+    private String fileExt;
+
 }

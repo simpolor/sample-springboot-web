@@ -3,18 +3,17 @@ package io.simpolor.upload.controller;
 import io.simpolor.upload.component.FileUploader;
 import io.simpolor.upload.component.data.Files;
 import io.simpolor.upload.domain.Result;
-import io.simpolor.upload.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-
 @RestController
-@RequestMapping("/student")
-public class StudentController {
+@RequestMapping("/teacher")
+public class TeacherController {
 
 	@Autowired
 	private FileUploader fileUploader;
@@ -22,17 +21,23 @@ public class StudentController {
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public ModelAndView uploadForm(ModelAndView mav){
 
-		mav.setViewName("upload");
+		mav.setViewName("upload_teacher");
+
 		return mav;
 	}
 
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
-	public Result upload(@Valid Student student) {
+	public Result upload(MultipartHttpServletRequest request) {
 
-		Files files = fileUploader.createFile(student.getProfile(), "student");
+		String name = request.getParameter("name");
+		String grade = request.getParameter("grade");
+		String age = request.getParameter("age");
+		MultipartFile profile = request.getFile("profile");
+
+		Files files = fileUploader.createFileV2(profile, "teacher");
 		if(files != null) {
 			return Result.builder()
-					.name(student.getName())
+					.name(name)
 					.orgFileName(files.getOrgFileName())
 					.savedFileName(files.getSavedFileName())
 					.fileSize(files.getFileSize())
@@ -40,19 +45,10 @@ public class StudentController {
 					.build();
 		}
 
-		return Result.builder().name(student.getName()).build();
+		return Result.builder().name(name).build();
 	}
 
-	/***
-	 * MultipartFile
-	 * - getName() : 파라미터 이름
-	 * - getOriginalFilename() : 파일 이름
-	 * - isEmpty() : 파일 존재 유무
-	 * - getBytes : 파일 데이터
-	 * - getInputStream() : 파일 데이터를 읽어오는 InputStream을 얻어옴
-	 * - transferTo(File file) : 파일 데이터를 지정한 파일로 저장
-	 */
-
+	
 
 
 }
