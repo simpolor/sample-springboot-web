@@ -12,7 +12,7 @@ import java.util.*;
 @Controller
 public class StudentController {
 
-	@RequestMapping(value="/student")
+	@RequestMapping(value="/")
 	public ModelAndView student(ModelAndView mav) {
 
 		List<String> classRoomList = new ArrayList<>();
@@ -44,7 +44,7 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/student/list")
+	@RequestMapping(value="/list")
 	public ModelAndView studentList(ModelAndView mav) {
 
 		List<Student> students = new ArrayList<>();
@@ -61,7 +61,7 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/student/view/{seq}", method=RequestMethod.GET)
+	@RequestMapping(value="/view/{seq}", method=RequestMethod.GET)
 	public ModelAndView studentView(ModelAndView mav, @PathVariable long seq) {
 
 		log.info("student view seq : {}", seq);
@@ -74,7 +74,7 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/student/write", method=RequestMethod.GET)
+	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public ModelAndView studentWrite(ModelAndView mav) {
 
 		log.info("student write");
@@ -84,7 +84,7 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/student/write", method=RequestMethod.POST)
+	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public ModelAndView studentWrite(ModelAndView mav, Student student) {
 
 		log.info("student write : {}", student);
@@ -95,7 +95,7 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/student/modify/{seq}", method=RequestMethod.GET)
+	@RequestMapping(value="/modify/{seq}", method=RequestMethod.GET)
 	public ModelAndView studentModify(ModelAndView mav, @PathVariable long seq) {
 
 		log.info("student modify seq : {}", seq);
@@ -108,7 +108,7 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/student/modify", method=RequestMethod.POST)
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public ModelAndView studentModify(ModelAndView mav, Student student) {
 
 		log.info("student modify : {}", student);
@@ -119,7 +119,7 @@ public class StudentController {
 		return mav;
 	}
 
-	@RequestMapping(value="/student/delete", method=RequestMethod.POST)
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public ModelAndView studentDelete(ModelAndView mav, @RequestParam("seq") long seq) {
 
 		log.info("student delete seq : {}", seq);
