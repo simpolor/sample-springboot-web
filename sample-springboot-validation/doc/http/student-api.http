@@ -1,0 +1,120 @@
+# Student 등록#1
+POST http://127.0.0.1:8080/student/register
+Content-Type: application/json
+
+{
+  "student_seq": 1,
+  "student_name": "박석영",
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobby": ["축구"]
+}
+
+###
+
+# Student 등록#2
+POST http://127.0.0.1:8080/student/register
+Content-Type: application/json
+
+{
+  "student_seq": 1,
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobby": ["축구"]
+}
+
+###
+
+# Student 등록#2 v1
+POST http://127.0.0.1:8080/student/register/v1
+Content-Type: application/json
+
+{
+  "student_seq": 1,
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobby": ["축구"]
+}
+
+###
+
+# Student 등록#2 v2 ( Custom BadRequestException )
+POST http://127.0.0.1:8080/student/register/v2
+Content-Type: application/json
+
+{
+  "student_seq": 1,
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "age": 18,
+  "hobby": ["축구"]
+}
+
+###
+
+# Student 등록#2 v3
+POST http://127.0.0.1:8080/student/register/v3
+Content-Type: application/json
+
+{
+  "student_seq": 1,
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobby": ["축구"]
+}
+
+###
+
+
+# Student 등록#3
+POST http://127.0.0.1:8080/student/register
+Content-Type: application/json
+
+{
+  "student_seq": 1,
+  "student_name": "",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobby": ["축구"]
+}
+
+###
+
+# Student 등록#4
+POST http://127.0.0.1:8080/student/register
+Content-Type: application/json
+
+{
+  "student_seq": 1,
+  "email": "simpolor@gmail.com",
+  "student_name": "박석영",
+  "room": "FLOWER",
+  "age": 18,
+  "hobby": ["축구"]
+}
+
+###
+
+# Student 등록#5
+POST http://127.0.0.1:8080/student/register
+Content-Type: application/json
+
+{
+  "student_seq": 1,
+  "email": "simpolor@gmail.com",
+  "student_name": "박석영",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18
+}
+
+###

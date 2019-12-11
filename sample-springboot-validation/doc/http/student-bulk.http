@@ -1,0 +1,51 @@
+# Student 대량 등록
+POST http://127.0.0.1:8080/student/registers
+Content-Type: application/json
+
+[
+  {
+    "student_seq": 1,
+    "student_name": "김영희",
+    "email": "simpolor@gmail.com",
+    "grade": 2,
+    "age": 18,
+    "hobby": ["축구"]
+  },
+  {
+    "student_seq": 2,
+    "student_name": "단순색",
+    "grade": 3,
+    "age": 19,
+    "hobby": ["핸드볼"]
+  }
+]
+
+###
+
+# Student 벌크 등록
+POST http://127.0.0.1:8080/student/bulk
+Content-Type: application/json
+
+{
+  "contents" : [
+    {
+      "student_seq": 1,
+      "student_name": "김영희",
+      "email": "simpolor@gmail.com",
+      "grade": 2,
+      "age": 18,
+      "hobby": ["축구"]
+    },
+    {
+      "student_seq": 2,
+      "student_name": "단순색",
+      "email": "simpolor@gmail.com",
+      "grade": 3,
+      "age": 19,
+      "hobby": ["핸드볼"]
+    }
+  ]
+}
+
+###
+

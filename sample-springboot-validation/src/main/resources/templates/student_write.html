@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <script>
+        function f_write() {
+            document.getElementById("writeForm").submit();
+        }
+    </script>
+    <style>
+        table, tr, th, td {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<div th:include="header :: header"></div>
+
+    <h1>Student Write</h1>
+
+    <form th:id="writeForm" th:action="@{/write}" th:method="post">
+        <div>
+            <p>Name : <input th:name="name" /></p>
+            <p>Grade : <input th:name="grade" /></p>
+            <p>Age : <input th:name="age" /></p>
+            <p>Hobby : <input th:name="hobby" /></p>
+        </div>
+
+        <hr />
+    </form>
+
+    <button th:onclick="'f_write()'">등록</button>
+    <button th:onclick="history.back()">뒤로</button>
+
+    <div th:include="footer :: footer"></div>
+</body>
+</html>
