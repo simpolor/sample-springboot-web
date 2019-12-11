@@ -3,8 +3,10 @@ package io.simpolor.validation.web.request;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.neovisionaries.i18n.LocaleCode;
 import io.simpolor.validation.domain.Student;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.validation.constraints.*;
 import java.util.List;
@@ -27,6 +29,8 @@ public class StudentRequest {
     private String email;
 
     private int grade;
+
+    private Locale locale;
 
     // Enum을 그냥 사용할 경우 @NotNull 등의 어노테이션을 붙이면
     // 항상 null 값으로 인식이 됨
@@ -63,6 +67,16 @@ public class StudentRequest {
         student.setHobby(request.getHobby());
 
         return student;
+    }
+
+    @Getter
+    public static class Locale {
+
+        LocaleCode localeCode;
+
+        public Locale(String value){
+            localeCode = LocaleCode.getByCode(value);
+        }
     }
 
 

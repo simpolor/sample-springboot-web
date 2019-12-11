@@ -8,6 +8,7 @@ Content-Type: application/json
   "email": "simpolor@gmail.com",
   "grade": 2,
   "room": "FLOWER",
+  "locale": "ko-KR",
   "age": 18,
   "hobby": ["축구"]
 }

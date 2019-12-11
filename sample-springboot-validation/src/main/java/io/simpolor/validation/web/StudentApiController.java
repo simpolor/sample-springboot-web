@@ -27,6 +27,9 @@ public class StudentApiController {
 	public ResponseEntity register(@Valid @RequestBody StudentRequest request) {
 
 		log.info("Request : {}", request);
+		if(request.getLocale() != null){
+			log.info("Request.getLocale : {}", request.getLocale().getLocaleCode());
+		}
 
 		// 유효성 검사를 하기 위해서는 @Valid 어노테이션이 필요함.
 		Student student = StudentRequest.to(request);
