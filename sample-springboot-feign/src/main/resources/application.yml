@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+#feign:
+#  client:
+#    config:
+#      defaut: #{feignName}
+#        connectTimeout: 5000
+#        readTimeout: 5000
+#        loggerLevel: basic
+
+
+#feign:
+#  client:
+#    config:
+#      feignName: # @FeignClient에서 name 값, 전역으로 설정하려면 default
+#        connectTimeout: 5000 # hystrix의 timeout 설정이 더 짧으면, hystirx 옵션을 따라감
+#        readTimeout: 5000
+#        loggerLevel: full
+#        errorDecoder: com.example.SimpleErrorDecoder
+#        retryer: com.example.SimpleRetryer # 요청이 실패했을 때 재시도에 대한 정책
+#        requestInterceptors:
+#          - com.example.FooRequestInterceptor
+#          - com.example.BarRequestInterceptor
+#        decode404: false
+#        encoder: com.example.SimpleEncoder # body의 내용을 Object로 변경하는 class 지정, 각각
+#        decoder: com.example.SimpleDecoder
+#        contract: com.example.SimpleContract
+
+# loggerLevel : NONE, BASIC, HEADER, FULL을 지정할 수 있음
+#  - NONE : default, 로그를 남기지 않음
+#  - BASIC : Request Method, URL과 응답 코드, 실행 시간을 남김
+#  - HEADERS : BASIC의 정보를 포함하여, 요청, 응답의 헤더를 남김
+#  - FULL : 요청, 응답의 header, body, metadata를 남김
+#  - logging.level.com.example.demo.PostClient: debug 등의 debug logger 설정이 되어 있어야함
