@@ -1,10 +1,13 @@
 package io.simpolor.feign.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
 	private long seq;
