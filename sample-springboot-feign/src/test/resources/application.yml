@@ -2,7 +2,7 @@ server:
   port: 8080
 
 remote:
-  host: http://localhost:8080
+  host: http://localhost:${wiremock.server.port}
 
 #feign:
 #  client:

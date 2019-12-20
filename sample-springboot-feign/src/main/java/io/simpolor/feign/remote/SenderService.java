@@ -1,8 +1,6 @@
 package io.simpolor.feign.remote;
 
 import feign.*;
-import feign.codec.Decoder;
-import feign.codec.Encoder;
 import feign.gson.GsonDecoder;
 import feign.gson.GsonEncoder;
 import io.simpolor.feign.domain.Student;
@@ -10,6 +8,7 @@ import io.simpolor.feign.domain.Type;
 import io.simpolor.feign.remote.feign.*;
 import io.simpolor.feign.web.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +18,9 @@ public class SenderService {
 
     private static final String RESULT_CODE = "000";
     private static final String RESULT_MESSAGE = "OK";
+
+    @Value("${remote.host}")
+    private String host;
 
     @Autowired
     private SenderClient senderClient;
@@ -39,7 +41,6 @@ public class SenderService {
         if(Type.REST.equals(type)){
             response = senderClient.post(student.getSeq(), request);
         }else if(Type.LINE.equals(type)){
-            System.out.println("type : "+type);
             response = requestLineClient.post(student.getSeq(), request);
         }else{
             response = senderClient.postForm(request);
@@ -64,7 +65,7 @@ public class SenderService {
                  .decoder(new GsonDecoder())
                 .decode404()
                 .logLevel(Logger.Level.BASIC)
-                .target(new Target.HardCodedTarget<>(RequestLineClient.class, "studentRequestLine", "http://localhost:8080"));
+                .target(new Target.HardCodedTarget<>(RequestLineClient.class, "studentRequestLine", host));
     }
 
 }
