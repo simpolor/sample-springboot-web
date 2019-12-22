@@ -17,28 +17,19 @@ public class StudentService {
         return studentRepository.findAll(pageable);
     }
 
-    public Page<Student> list(Pageable pageable) {
-
-        // 페이징 사이즈를 서비스에서 불러와서 처리
-
-
-        return studentRepository.findAll(pageable);
-    }
-
     /***
      * PageRequest는 Pageable를 상속받는다.
-     * @param pageRequest
+     * @param page
+     * @param size
      * @return
      */
-    public Page<Student> list(PageRequest pageRequest) {
+    public Page<Student> list(int page, int size) {
 
-        return studentRepository.findAll(pageRequest);
+        // PageRequest는 Pageable에서 상속 받음
+        // Pageable에 대한 기본 설정에 대해서 처리하지는 못함,
+        Pageable paging = PageRequest.of(page, size);
+
+        return studentRepository.findAll(paging);
     }
 
-    public Page<Student> list(int page) {
-
-        PageRequest pageRequest = PageRequest.of(page, 10);
-
-        return studentRepository.findAll(pageRequest);
-    }
 }

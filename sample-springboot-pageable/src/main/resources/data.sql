@@ -46,3 +46,32 @@ INSERT INTO student(name, grade, age)
 INSERT INTO student(name, grade, age)
      VALUES ('계병채', 2, 18);
 
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채1', 2, 18);
+
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채2', 2, 18);
+
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채3', 2, 18);
+
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채4', 2, 18);
+
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채5', 2, 18);
+
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채6', 2, 18);
+
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채7', 2, 18);
+
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채8', 2, 18);
+
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채9', 2, 18);
+
+INSERT INTO student(name, grade, age)
+     VALUES ('계병채10', 2, 18);

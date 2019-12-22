@@ -6,6 +6,9 @@ import io.simpolor.pageable.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -30,6 +33,10 @@ public class StudentApiController {
 				page.getTotalElements(), page.getNumber(), page.getSize());
 	}
 
+	@RequestMapping(value="/api/v3/student/list", method=RequestMethod.GET)
+	public Page<Student> listV3( @RequestParam(name="page", defaultValue = "1") int page,
+								 @RequestParam(name="size", defaultValue = "10") int size) {
 
-
+		return studentService.list(page, size);
+	}
 }
