@@ -15,3 +15,7 @@ spring:
   thymeleaf:
     cache: false
 
+jsf:
+  primefaces:
+    FONT_AWESOME: true
+
