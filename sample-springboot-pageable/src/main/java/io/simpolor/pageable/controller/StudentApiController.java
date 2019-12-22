@@ -39,4 +39,42 @@ public class StudentApiController {
 
 		return studentService.list(page, size);
 	}
+
+	/***
+	 * {
+	 *   "content": [
+	 *     {
+	 *       "seq": 1,
+	 *       "name": "하니",
+	 *       "grade": 1,
+	 *       "age": 17
+	 *     }
+	 *   ],
+	 *   "pageable": {
+	 *     "sort": {
+	 *       "sorted": false,
+	 *       "unsorted": true,
+	 *       "empty": true
+	 *     },
+	 *     "offset": 0,
+	 *     "pageSize": 10,
+	 *     "pageNumber": 0,
+	 *     "paged": true,
+	 *     "unpaged": false
+	 *   },
+	 *   "totalPages": 3,
+	 *   "totalElements": 26,
+	 *   "last": false,
+	 *   "number": 0,
+	 *   "size": 10,
+	 *   "sort": {
+	 *     "sorted": false,
+	 *     "unsorted": true,
+	 *     "empty": true
+	 *   },
+	 *   "numberOfElements": 10,
+	 *   "first": true,
+	 *   "empty": false
+	 * }
+	 */
 }
