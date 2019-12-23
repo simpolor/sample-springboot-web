@@ -11,6 +11,8 @@ spring:
         one-indexed-parameters: true # page를 1부터 시작할지 0부터 시작할지 여부
         page-parameter: page # 페이지 파라미터
         size-parameter: size # 사이즈 파라미터
+      #sort:
+        #sort-parameter: seq
   jpa:
     database: H2
     hibernate:
