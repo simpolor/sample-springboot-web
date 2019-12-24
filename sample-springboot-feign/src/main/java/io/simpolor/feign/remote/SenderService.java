@@ -6,7 +6,7 @@ import feign.gson.GsonEncoder;
 import io.simpolor.feign.domain.Student;
 import io.simpolor.feign.domain.Type;
 import io.simpolor.feign.remote.feign.*;
-import io.simpolor.feign.web.response.ApiResponse;
+import io.simpolor.feign.controller.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

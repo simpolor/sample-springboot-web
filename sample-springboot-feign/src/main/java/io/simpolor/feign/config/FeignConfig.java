@@ -1,26 +1,14 @@
 package io.simpolor.feign.config;
 
-import com.netflix.hystrix.HystrixCommand;
-import feign.*;
-import feign.codec.Decoder;
 import feign.codec.Encoder;
 import feign.form.FormEncoder;
-import feign.hystrix.HystrixFeign;
-import feign.optionals.OptionalDecoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.cloud.openfeign.*;
 import org.springframework.cloud.openfeign.support.*;
 import org.springframework.context.annotation.*;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.format.support.DefaultFormattingConversionService;
-import org.springframework.format.support.FormattingConversionService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * basePackages를 지정안할 경우 Interface를 Autowired할 수 없다.

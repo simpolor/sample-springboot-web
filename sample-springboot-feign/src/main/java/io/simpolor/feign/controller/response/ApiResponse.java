@@ -1,4 +1,4 @@
-package io.simpolor.feign.web.response;
+package io.simpolor.feign.controller.response;
 
 import lombok.Value;
 

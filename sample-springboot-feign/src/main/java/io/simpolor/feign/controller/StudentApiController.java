@@ -1,9 +1,9 @@
-package io.simpolor.feign.web;
+package io.simpolor.feign.controller;
 
 import io.simpolor.feign.domain.Student;
 import io.simpolor.feign.domain.Type;
 import io.simpolor.feign.remote.SenderService;
-import io.simpolor.feign.web.response.ApiResponse;
+import io.simpolor.feign.controller.response.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

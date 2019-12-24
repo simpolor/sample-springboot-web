@@ -1,4 +1,4 @@
-package io.simpolor.feign.web;
+package io.simpolor.feign.controller;
 
 import io.simpolor.feign.domain.Student;
 import lombok.extern.slf4j.Slf4j;

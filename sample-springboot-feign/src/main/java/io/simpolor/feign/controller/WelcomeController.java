@@ -1,4 +1,4 @@
-package io.simpolor.feign.web;
+package io.simpolor.feign.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

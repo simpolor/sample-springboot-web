@@ -4,7 +4,7 @@ import io.simpolor.feign.config.FeignConfig;
 import io.simpolor.feign.domain.Student;
 import io.simpolor.feign.domain.Type;
 import io.simpolor.feign.remote.feign.*;
-import io.simpolor.feign.web.response.ApiResponse;
+import io.simpolor.feign.controller.response.ApiResponse;
 import lombok.val;
 import org.junit.*;
 import org.junit.runner.RunWith;
