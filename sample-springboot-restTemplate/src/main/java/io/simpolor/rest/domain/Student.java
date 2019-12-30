@@ -1,11 +1,16 @@
 package io.simpolor.rest.domain;
 
-import lombok.Data;
+import lombok.*;
 
-import java.io.Serializable;
+import java.util.List;
 
 @Data
-public class Student implements Serializable {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Student {
+
+	private long seq;
 
 	private String name;
 
@@ -13,6 +18,6 @@ public class Student implements Serializable {
 
 	private int age;
 
-	private String profile;
+	private List<String> hobby;
 
 }

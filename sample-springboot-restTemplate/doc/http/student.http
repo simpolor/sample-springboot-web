@@ -1,0 +1,9 @@
+# Student 메세지 전달 REST
+POST http://127.0.0.1:8080/api/student/sender/REST?seq=1&name=parksy
+
+###
+
+# Student 메세지 전달 FORM
+POST http://127.0.0.1:8080/api/student/sender/FORM?seq=1&name=parksy
+
+###
