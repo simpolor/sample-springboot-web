@@ -1,7 +1,7 @@
-package io.simpolor.validation.web;
+package io.simpolor.validation.controller;
 
-import io.simpolor.validation.web.request.BulkRequest;
-import io.simpolor.validation.web.request.StudentRequest;
+import io.simpolor.validation.controller.request.BulkRequest;
+import io.simpolor.validation.controller.request.StudentRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

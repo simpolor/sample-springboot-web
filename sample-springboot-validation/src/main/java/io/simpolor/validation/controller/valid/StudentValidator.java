@@ -1,6 +1,6 @@
-package io.simpolor.validation.web.valid;
+package io.simpolor.validation.controller.valid;
 
-import io.simpolor.validation.web.request.StudentRequest;
+import io.simpolor.validation.controller.request.StudentRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;

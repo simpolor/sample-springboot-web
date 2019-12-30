@@ -1,8 +1,7 @@
 package io.simpolor.validation.web;
 
 import com.google.gson.*;
-import io.simpolor.validation.domain.Student;
-import io.simpolor.validation.web.request.StudentRequest;
+import io.simpolor.validation.controller.request.StudentRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

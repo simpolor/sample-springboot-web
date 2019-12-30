@@ -1,10 +1,10 @@
-package io.simpolor.validation.web;
+package io.simpolor.validation.controller;
 
 import io.simpolor.validation.exception.BadRequestException;
-import io.simpolor.validation.web.request.StudentRequest;
-import io.simpolor.validation.web.response.StudentResponse;
+import io.simpolor.validation.controller.request.StudentRequest;
+import io.simpolor.validation.controller.response.StudentResponse;
 import io.simpolor.validation.domain.Student;
-import io.simpolor.validation.web.valid.StudentValidator;
+import io.simpolor.validation.controller.valid.StudentValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

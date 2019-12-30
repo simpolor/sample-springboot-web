@@ -1,4 +1,4 @@
-package io.simpolor.validation.web.response;
+package io.simpolor.validation.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

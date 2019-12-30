@@ -12,6 +12,9 @@
         table, tr, th, td {
             border: 1px solid #000;
         }
+        .error-msg {
+            color: #FF0000;
+        }
     </style>
 </head>
 <body>
@@ -19,12 +22,24 @@
 
     <h1>Student Write</h1>
 
-    <form th:id="writeForm" th:action="@{/write}" th:method="post">
+    <form th:id="writeForm" th:object="${student}" th:action="@{/write}" th:method="post">
         <div>
-            <p>Name : <input th:name="name" /></p>
-            <p>Grade : <input th:name="grade" /></p>
-            <p>Age : <input th:name="age" /></p>
-            <p>Hobby : <input th:name="hobby" /></p>
+            <p>
+                Name : <input th:name="name" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </p>
+            <p>
+                Grade : <input th:name="grade" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </p>
+            <p>
+                Age : <input th:name="age" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+            </p>
+            <p>
+                Hobby : <input th:name="hobby" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+            </p>
         </div>
 
         <hr />

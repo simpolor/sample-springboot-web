@@ -1,4 +1,4 @@
-package io.simpolor.validation.web.valid;
+package io.simpolor.validation.controller.valid;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -1,4 +1,4 @@
-package io.simpolor.validation.web.request;
+package io.simpolor.validation.controller.request;
 
 import lombok.Data;
 

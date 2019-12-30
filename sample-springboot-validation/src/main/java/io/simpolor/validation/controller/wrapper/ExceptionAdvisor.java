@@ -1,4 +1,4 @@
-package io.simpolor.validation.web.wrapper;
+package io.simpolor.validation.controller.wrapper;
 
 import io.simpolor.validation.exception.BadRequestException;
 import org.springframework.http.HttpStatus;
