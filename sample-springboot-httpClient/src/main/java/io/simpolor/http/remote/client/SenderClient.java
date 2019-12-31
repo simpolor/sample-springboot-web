@@ -22,8 +22,8 @@ import java.util.List;
 @Component
 public class SenderClient {
 
-    @Value("${remote.host}")
-    private String remoteHost;
+    @Value("${remote.url}")
+    private String remoteUrl;
 
     public StudentResponse post(long seq, StudentRequest request){
 
@@ -36,7 +36,7 @@ public class SenderClient {
             StringEntity json = new StringEntity(gson.toJson(request));
 
             // POST 메소드 생성
-            HttpPost post = new HttpPost(remoteHost.concat("/api/student/receiver/"+seq));
+            HttpPost post = new HttpPost(remoteUrl.concat("/api/student/receiver/"+seq));
             post.addHeader("Content-Type", "application/json");
             post.setEntity(json);
 
@@ -72,7 +72,7 @@ public class SenderClient {
             HttpEntity postParam = new UrlEncodedFormEntity(urlParameters);
 
             // POST 메소드 생성
-            HttpPost post = new HttpPost(remoteHost.concat("/student/receiver/form"));
+            HttpPost post = new HttpPost(remoteUrl.concat("/student/receiver/form"));
             post.addHeader("Content-Type", "application/x-www-form-urlencoded");
             post.setEntity(postParam);
 

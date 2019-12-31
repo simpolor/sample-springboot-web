@@ -18,9 +18,6 @@ public class SenderService {
     private static final String RESULT_CODE = "000";
     private static final String RESULT_MESSAGE = "OK";
 
-    @Value("${remote.host}")
-    private String host;
-
     @Autowired
     private SenderClient senderClient;
 
