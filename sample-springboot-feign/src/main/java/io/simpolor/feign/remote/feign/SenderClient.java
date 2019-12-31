@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * fallback : hystrix fallback class를 지정
  * fallbackFactory : hystrix fallback factory를 지정
  */
-@FeignClient(name="senderClient", url="${remote.host}")
+@FeignClient(name="senderClient", url="${remote.url}")
 public interface SenderClient {
 
     @Headers("Content-Type: application/json")

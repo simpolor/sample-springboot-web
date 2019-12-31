@@ -19,8 +19,8 @@ public class SenderService {
     private static final String RESULT_CODE = "000";
     private static final String RESULT_MESSAGE = "OK";
 
-    @Value("${remote.host}")
-    private String host;
+    @Value("${remote.url}")
+    private String remoteUrl;
 
     @Autowired
     private SenderClient senderClient;
@@ -40,7 +40,7 @@ public class SenderService {
         StudentResponse response;
         if(Type.REST.equals(type)){
             response = senderClient.post(student.getSeq(), request);
-        }else if(Type.LINE.equals(type)){
+        }else if(Type.LINE.equals(type)){ // RequestLine은 순수 자바에서 사용
             response = requestLineClient.post(student.getSeq(), request);
         }else{
             response = senderClient.postForm(request);
@@ -65,7 +65,7 @@ public class SenderService {
                  .decoder(new GsonDecoder())
                 .decode404()
                 .logLevel(Logger.Level.BASIC)
-                .target(new Target.HardCodedTarget<>(RequestLineClient.class, "studentRequestLine", host));
+                .target(new Target.HardCodedTarget<>(RequestLineClient.class, "studentRequestLine", remoteUrl));
     }
 
 }
