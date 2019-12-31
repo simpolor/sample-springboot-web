@@ -1,4 +1,4 @@
-package io.simpolor.rest.domain;
+package io.simpolor.rest.remote.client;
 
 import lombok.Builder;
 import lombok.Data;

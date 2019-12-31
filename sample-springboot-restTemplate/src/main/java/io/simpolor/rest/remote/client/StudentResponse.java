@@ -1,4 +1,4 @@
-package io.simpolor.rest.domain;
+package io.simpolor.rest.remote.client;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
