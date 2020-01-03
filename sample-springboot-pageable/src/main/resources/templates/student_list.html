@@ -47,7 +47,7 @@
     <h1>Student List</h1>
 
     <div>
-        <span th:text="'Totalcount : ' + ${pages.getTotalElements()}">0</span>
+        <span th:text="'Totalcount : ' + ${list.getTotalElements()}">0</span>
     </div>
 
     <table>
@@ -60,7 +60,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="student : ${pages.content}">
+            <tr th:each="student : ${list.content}">
                 <td th:text="${student.seq}"></td>
                 <td><a th:text="${student.name}" th:href="@{/student/view/{seq}(seq=${student.seq})}"></a></td>
                 <td th:text="${student.grade}"></td>
@@ -73,21 +73,26 @@
     <hr />
 
     <div id="pagination">
-        <ul>
-            <li th:class="${pages.number eq 0}?'disabled':''">
-                <a th:unless="${pages.number eq 0}" th:href="@{__${#httpServletRequest.requestURI}__(page=1)}">first</a>
+        <ul th:with="start=${T(Math).floor(list.number/10)*10 + 1},
+            last=(${start + 9 < list.totalPages ? start + 9 : list.totalPages})">
+
+            <li th:class="${list.number eq 0}?'disabled':''">
+                <a th:unless="${list.number eq 0}" th:href="@{__${#httpServletRequest.requestURI}__(page=1)}">first</a>
             </li>
-            <li th:class="${pages.number eq 0}?'disabled':''">
-                <a th:unless="${pages.number eq 0}" th:href="@{__${#httpServletRequest.requestURI}__(page=${(pages.number+1)-1})}">previous</a>
+
+            <li th:class="${list.number eq 0}?'disabled':''">
+                <a th:unless="${list.number eq 0}" th:href="@{__${#httpServletRequest.requestURI}__(page=${(list.number+1)-1})}">previous</a>
             </li>
-            <li th:each="no:${#numbers.sequence(0, pages.totalPages-1)}" th:class="${pages.number eq no}?'active':''">
-                <a th:href="@{__${#httpServletRequest.requestURI}__(page=${no+1})}" th:inline="text">[[${no+1}]]</a>
+
+                <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == list.number + 1} ? 'active'">
+                <a th:text="${page}" th:href="@{__${#httpServletRequest.requestURI}__(page=${page})}"></a>
             </li>
-            <li th:class="${pages.number+1 ge pages.totalPages}?'disabled':''">
-                <a th:unless="${pages.number+1 ge pages.totalPages}" th:href="@{__${#httpServletRequest.requestURI}__(page=${(pages.number+1)+1})}">next</a>
+
+            <li th:class="${list.number+1 ge list.totalPages}?'disabled':''">
+                <a th:unless="${list.number+1 ge list.totalPages}" th:href="@{__${#httpServletRequest.requestURI}__(page=${(list.number+1)+1})}">next</a>
             </li>
-            <li th:class="${pages.number+1 ge pages.totalPages}?'disabled':''">
-                <a th:unless="${pages.number+1 ge pages.totalPages}" th:href="@{__${#httpServletRequest.requestURI}__(page=${(pages.totalPages)})}">last</a>
+            <li th:class="${list.number+1 ge list.totalPages}?'disabled':''">
+                <a th:unless="${list.number+1 ge list.totalPages}" th:href="@{__${#httpServletRequest.requestURI}__(page=${(list.totalPages)})}">last</a>
             </li>
         </ul>
     </div><!-- pagination -->

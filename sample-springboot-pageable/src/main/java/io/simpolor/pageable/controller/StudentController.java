@@ -24,7 +24,7 @@ public class StudentController {
 		log.info("Pageable : "+studentService.get(pageable).getPageable());
 		log.info("Content : "+studentService.get(pageable).getContent());
 
-		mav.addObject("pages", studentService.get(pageable));
+		mav.addObject("list", studentService.get(pageable));
 		mav.setViewName("student_list");
 
 		return mav;
