@@ -85,7 +85,7 @@
             </li>
 
                 <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == list.number + 1} ? 'active'">
-                <a th:text="${page}" th:href="@{__${#httpServletRequest.requestURI}__(page=${page})}"></a>
+                <a th:text="${page}" th:href="@{/v1/student/list(page=${page})}"></a>
             </li>
 
             <li th:class="${list.number+1 ge list.totalPages}?'disabled':''">
