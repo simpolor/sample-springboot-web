@@ -173,7 +173,7 @@
         <img th:src="@{/image/ico_new.gif}" th:title="${studentName}" th:alt="${studentName}">
     </div>
     <div>
-        <img src="/image/ico_new.gif" th:attr="src=@{/image/ico_new.gif}, title=${studentName}, alt=${studentName}">
+        <img src="/static/image/ico_new.gif" th:attr="src=@{/image/ico_new.gif}, title=${studentName}, alt=${studentName}">
 
     </div>
 
@@ -224,9 +224,9 @@
     <h2>Fragment</h2>
 
     <div th:include="header :: #header"></div><!-- id의 내용을 가져옴 -->
-    <div th:include="header :: header"></div><!-- fragment의 내용을 가져옴 -->
-    <div th:include="header :: header2(${studentName})"></div><!-- fragment의 파라미터를 넘겨줌 -->
-    <div th:include="header :: header3(name=${studentName})"></div><!-- fragment의 파라미터를 넘겨줌 -->
+    <div th:include="header :: headerFragment"></div><!-- fragment의 내용을 가져옴 -->
+    <div th:include="header :: headerParamFragment(${studentName})"></div><!-- fragment의 파라미터를 넘겨줌 -->
+    <div th:include="header :: headerValueFragment(name=${studentName})"></div><!-- fragment의 파라미터를 넘겨줌 -->
 
     <hr />
 

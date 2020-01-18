@@ -12,8 +12,15 @@ import java.util.*;
 @Controller
 public class StudentController {
 
-	@RequestMapping(value="/")
-	public ModelAndView student(ModelAndView mav) {
+	@RequestMapping(value="/layout")
+	public ModelAndView studentLayout(ModelAndView mav) {
+		mav.setViewName("student/student");
+
+		return mav;
+	}
+
+	@RequestMapping(value="/guide")
+	public ModelAndView guide(ModelAndView mav) {
 
 		List<String> classRoomList = new ArrayList<>();
 		classRoomList.add("햇님반");
@@ -39,7 +46,7 @@ public class StudentController {
 		mav.addObject("studentName", "홍길동");
 		mav.addObject("isStudent", true);
 		mav.addObject("totalcount", 5);
-		mav.setViewName("student");
+		mav.setViewName("guide");
 
 		return mav;
 	}
