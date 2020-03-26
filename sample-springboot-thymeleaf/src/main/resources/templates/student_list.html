@@ -6,6 +6,7 @@
     <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
     <!--<link rel="stylesheet" type="text/css" href="./webjars/font-awesome/4.7.0/css/font-awesome.min.css">-->
     <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/default.css}">
     <style>
         table, tr, th, td {
             border: 1px solid #000;
@@ -54,7 +55,7 @@
     </script>
 </head>
 <body>
-    <div th:include="header :: header"></div><!-- fragment의 내용을 가져옴 -->
+    <div th:include="header :: headerFragment"></div><!-- fragment의 내용을 가져옴 -->
 
     <h1>Student List</h1>
 
@@ -122,6 +123,6 @@
     <hr />
     <button th:onclick="f_write()">등록</button>
 
-    <div th:include="footer :: footer"></div>
+    <div th:include="footer :: footerFragment"></div>
 </body>
 </html>
