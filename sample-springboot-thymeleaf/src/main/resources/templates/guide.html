@@ -55,6 +55,15 @@
         <!-- PathVariable -->
         <a th:text="${studentName}" th:href="@{/student/view/{seq}(seq=${studentSeq})}"></a>
     </div>
+    <div>
+        <!-- httpServletRequest.requestURL -->
+        <a th:text="${studentName}" th:href="@{__${#httpServletRequest.requestURL}__}"></a>
+    </div>
+    <div>
+        <!-- httpServletRequest.requestURI -->
+        <a th:text="${studentName}" th:href="@{|${#httpServletRequest.requestURI}/student|}"></a>
+    </div>
+
 
     <hr />
 
@@ -67,6 +76,10 @@
         <!-- if/unless -->
         <span th:if="${totalcount} != 0" th:text="|Totalcount : ${totalcount}|"></span>
         <span th:unless="${totalcount} != 0">0</span>
+    </div>
+    <div>
+        <!-- if -->
+        <span th:if="${studentName.equals('홍길동')}">홍길동</span>
     </div>
     <div>
         <!-- 이항 연산자 -->
