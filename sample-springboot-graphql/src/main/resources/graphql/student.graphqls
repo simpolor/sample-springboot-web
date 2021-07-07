@@ -1,0 +1,33 @@
+# students.graphqls
+type Student {
+	seq: Int
+	name: String!
+	grade: Int!
+	age: Int
+	hobby: String
+}
+
+input StudentParam {
+	seq: Int
+	name: String!
+	grade: Int!
+	age: Int
+	hobby: String
+}
+
+type Query {
+	findAllStudents: [Student]!
+	getStudent(seq: Int): Student
+	countStudents: Int!
+}
+
+type Mutation {
+	createStudent(name: String!, grade: Int!, age: Int, hobby: String) : Student
+	updateStudent(studentParam: StudentParam) : Student!
+	deleteStudent(seq: ID) : Boolean
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}
