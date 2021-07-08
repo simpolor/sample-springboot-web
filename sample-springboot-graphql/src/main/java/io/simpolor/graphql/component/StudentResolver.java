@@ -1,18 +1,19 @@
 package io.simpolor.graphql.component;
 
-import com.coxautodev.graphql.tools.GraphQLResolver;
-import io.simpolor.graphql.repository.StudentRepository;
+import graphql.kickstart.tools.GraphQLResolver;
 import io.simpolor.graphql.repository.entity.Student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
-// @Component
+@Component
 @RequiredArgsConstructor
 public class StudentResolver implements GraphQLResolver<Student> {
 
-    private final StudentRepository studentRepository;
+    // private final ReportCardService reportCardService;
+
+    /* public Iterable<ReportCard> findAllReportCards(){
+        return reportCardService.getAll();
+    }*/
 
     /*public Student getStudent(Long seq){
 

@@ -1,6 +1,6 @@
 package io.simpolor.graphql.component;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import graphql.kickstart.tools.GraphQLQueryResolver;
 import io.simpolor.graphql.repository.StudentRepository;
 import io.simpolor.graphql.repository.entity.Student;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class Query implements GraphQLQueryResolver {
+public class StudentQuery implements GraphQLQueryResolver {
 
     private final StudentRepository studentRepository;
 

@@ -20,5 +20,20 @@ spring:
       path: /h2-console # 콘솔 주소변경
 
 graphql:
+  tools:
+    # resource 디렉토리 내의 스키마 파일의 위치 설정
+    schema-location-pattern: "**/*.graphqls"
+    # 스키마 확인 기능을 사용하여 타입 시스템
+    introspection-enabled: true
   servlet:
-    mapping: /api/graphql
+    # GraphQL 요청을 받을 endpoint 설정
+    mapping: /graphql
+    # 사용여부
+    enabled: true
+    # CORS 검사 사용 여부
+    corsEnabled: true
+    # CORS 설정
+    cors:
+      # Allowed origin 도메인 설정
+      # List 로 받기 때문에 여러 도메인을 설정 할 수 있다.
+      allowed-origins: http://localhost

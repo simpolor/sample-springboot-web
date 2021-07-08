@@ -13,9 +13,6 @@ CREATE TABLE `report_card` (
   `korean` INT(11) NULL DEFAULT NULL COMMENT '국어',
   `english` INT(11) NULL DEFAULT NULL COMMENT '영어',
   `math` INT(11) NULL DEFAULT NULL COMMENT '수학',
-  `social` INT(11) NULL DEFAULT NULL COMMENT '사회',
-  `science` INT(11) NULL DEFAULT NULL COMMENT '과학',
-  `korean_history` INT(11) NULL DEFAULT NULL COMMENT '한국사',
   `student_seq` INT(11) NOT NULL COMMENT '학생 번호',
   PRIMARY KEY (`seq`)
 );

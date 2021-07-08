@@ -1,11 +1,11 @@
 # Student 전체 카운트
-GET http://127.0.0.1:8080/api/graphql?query={countStudents}
+GET http://127.0.0.1:8080/graphql?query={countStudents}
 Content-Type: application/graphql
 
 ###
 
 # Student 전체 카운트
-POST http://127.0.0.1:8080/api/graphql
+POST http://127.0.0.1:8080/graphql
 Content-Type: application/graphql
 
 query {
@@ -15,7 +15,7 @@ query {
 ###
 
 # Student 리스트
-POST http://127.0.0.1:8080/api/graphql
+POST http://127.0.0.1:8080/graphql
 Content-Type: application/graphql
 
 query {
@@ -30,24 +30,8 @@ query {
 
 ###
 
-POST http://127.0.0.1:8080/api/graphql
-Content-Type: application/graphql
-
-query {
-  countStudents
-  findAllStudents {
-    seq
-    name
-    grade
-    age
-    hobby
-  }
-}
-
-###
-
-# Student 조회
-POST http://127.0.0.1:8080/api/graphql
+# Student 조회 ( 같은 함수 2번은 에러가 발생 )
+POST http://127.0.0.1:8080/graphql
 Content-Type: application/graphql
 
 query {
@@ -62,8 +46,31 @@ query {
 
 ###
 
+POST http://127.0.0.1:8080/graphql
+Content-Type: application/graphql
+
+query {
+  countStudents
+  findAllStudents {
+    seq
+    name
+    grade
+    age
+    hobby
+  }
+  getStudent(seq: 1){
+    seq
+    name
+    grade
+    age
+    hobby
+  }
+}
+
+###
+
 # Student 등록
-POST http://127.0.0.1:8080/api/graphql
+POST http://127.0.0.1:8080/graphql
 Content-Type: application/graphql
 
 mutation {
@@ -79,7 +86,7 @@ mutation {
 ###
 
 # Student 수정
-POST http://127.0.0.1:8080/api/graphql
+POST http://127.0.0.1:8080/graphql
 Content-Type: application/graphql
 
 mutation {
@@ -103,7 +110,7 @@ mutation {
 ###
 
 # Student 삭제
-POST http://127.0.0.1:8080/api/graphql
+POST http://127.0.0.1:8080/graphql
 Content-Type: application/graphql
 
 mutation {

@@ -22,8 +22,5 @@ public class ReportCard {
 	private Integer korean;
 	private Integer english;
 	private Integer math;
-	private Integer social;
-	private Integer science;
-	private Integer koreanHistory;
 
 }

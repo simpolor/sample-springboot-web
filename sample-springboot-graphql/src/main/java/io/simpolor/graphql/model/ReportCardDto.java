@@ -29,9 +29,6 @@ public class ReportCardDto {
 	private Integer korean;
 	private Integer english;
 	private Integer math;
-	private Integer social;
-	private Integer science;
-	private Integer koreanHistory;
 
 	public ReportCard toEntity(){
 
@@ -40,9 +37,6 @@ public class ReportCardDto {
 		reportCard.setKorean(this.korean);
 		reportCard.setEnglish(this.english);
 		reportCard.setMath(this.math);
-		reportCard.setSocial(this.social);
-		reportCard.setScience(this.science);
-		reportCard.setKoreanHistory(this.koreanHistory);
 
 		reportCard.setStudent(this.student.toEntity());
 
@@ -57,9 +51,6 @@ public class ReportCardDto {
 		reportCardDto.setKorean(reportCard.getKorean());
 		reportCardDto.setEnglish(reportCard.getEnglish());
 		reportCardDto.setMath(reportCard.getMath());
-		reportCardDto.setSocial(reportCard.getSocial());
-		reportCardDto.setScience(reportCard.getScience());
-		reportCardDto.setKoreanHistory(reportCard.getKoreanHistory());
 
 		if(Objects.nonNull(reportCard.getStudent())){
 			reportCardDto.setStudentSeq(reportCard.getStudent().getSeq());

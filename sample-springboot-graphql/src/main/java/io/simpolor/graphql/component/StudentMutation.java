@@ -1,6 +1,6 @@
 package io.simpolor.graphql.component;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import io.simpolor.graphql.repository.StudentRepository;
 import io.simpolor.graphql.repository.entity.Student;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class Mutation implements GraphQLMutationResolver {
+public class StudentMutation implements GraphQLMutationResolver {
 
     private final StudentRepository studentRepository;
 
