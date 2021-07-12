@@ -1,0 +1,54 @@
+# Student 전체 카운트
+GET http://127.0.0.1:8080/report-cards/total-count
+
+###
+
+# Student 리스트
+GET http://127.0.0.1:8080/report-cards
+
+###
+
+# Student 조회
+GET http://127.0.0.1:8080/report-cards/1
+
+###
+
+# Student 등록
+POST http://127.0.0.1:8080/report-cards
+Content-Type: application/json
+
+{
+  "korean": 30,
+  "english": 30,
+  "math": 30,
+  "social": 30,
+  "science": 30,
+  "korean_history": 30,
+  "student": {
+    "seq": 1
+  }
+}
+
+###
+
+# Student 수정
+PUT http://127.0.0.1:8080/report-cards/3
+Content-Type: application/json
+
+{
+  "korean": 35,
+  "english": 35,
+  "math": 35,
+  "social": 35,
+  "science": 35,
+  "korean_history": 35,
+  "student": {
+    "seq": 2
+  }
+}
+###
+
+# Student 삭제
+DELETE http://127.0.0.1:8080/report-cards/3
+
+###

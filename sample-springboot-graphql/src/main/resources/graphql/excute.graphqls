@@ -1,0 +1,25 @@
+# excute.graphqls
+type Query {
+	findAllStudents: [Student]!
+	getStudent(seq: Int): Student
+	countStudents: Int!
+
+	findAllReportCards: [ReportCard]!
+	getReportCard(seq: Int): ReportCard
+	countReportCards: Int!
+}
+
+type Mutation {
+	createStudent(name: String!, grade: Int!, age: Int, hobby: String) : Student
+	updateStudent(studentParam: StudentParam) : Student!
+	deleteStudent(seq: ID) : Boolean
+
+	createReportCard(korean: Int, english: Int, math: Int, studentParam: StudentParam) : ReportCard
+	updateReportCard(reportCardParam: ReportCardParam) : ReportCard!
+	deleteReportCard(seq: Int) : Boolean
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}

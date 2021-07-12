@@ -1,0 +1,16 @@
+# students.graphqls
+type Student {
+	seq: Int
+	name: String!
+	grade: Int!
+	age: Int
+	hobby: String
+}
+
+input StudentParam {
+	seq: Int
+	name: String!
+	grade: Int!
+	age: Int
+	hobby: String
+}

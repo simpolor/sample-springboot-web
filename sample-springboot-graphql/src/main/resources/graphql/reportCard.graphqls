@@ -1,0 +1,16 @@
+# reportCard.graphqls
+type ReportCard {
+	seq: Int!
+	korean: Int
+	english: Int
+	math: Int
+	student: Student
+}
+
+input ReportCardParam {
+	seq: Int!
+	korean: Int
+	english: Int
+	math: Int
+	student: StudentParam
+}

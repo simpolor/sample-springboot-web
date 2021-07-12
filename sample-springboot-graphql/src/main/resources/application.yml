@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+# 개발자가 설정하지 않으면 아래 정보로 기본값이 설정됨
+spring:
+  jpa:
+    database: H2
+    hibernate:
+      ddl-auto: none # DB를 초기화하는 속성
+
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true # 콘솔 활성화 여부
+      path: /h2-console # 콘솔 주소변경
+
+graphql:
+  tools:
+    # resource 디렉토리 내의 스키마 파일의 위치 설정
+    schema-location-pattern: "**/*.graphqls"
+    # 스키마 확인 기능을 사용하여 타입 시스템
+    introspection-enabled: true
+  servlet:
+    # GraphQL 요청을 받을 endpoint 설정
+    mapping: /graphql
+    # 사용여부
+    enabled: true
+    # CORS 검사 사용 여부
+    corsEnabled: true
+    # CORS 설정
+    cors:
+      # Allowed origin 도메인 설정
+      # List 로 받기 때문에 여러 도메인을 설정 할 수 있다.
+      allowed-origins: http://localhost
