@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Modify</title>
+    <script>
+        function fnModify() {
+            document.getElementById("modifyForm").submit();
+        }
+    </script>
+    <style>
+        table, tr, th, td {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div th:include="header :: headerFragment"></div>
+
+    <h1>Student Modify</h1>
+
+    <form th:id="modifyForm" th:action="@{/modify}" th:method="post">
+        <input th:type="hidden" th:name="id" th:value="${student.id}" />
+
+        <div>
+            <p>Name : <input th:name="name" th:value="${student.name}" /></p>
+            <p>Grade : <input th:name="grade" th:value="${student.grade}" /></p>
+            <p>Age : <input th:name="age" th:value="${student.age}" /></p>
+            <p>Hobby : <input th:name="hobbies" th:value="${student.hobbies}" /></p>
+        </div>
+
+        <hr />
+    </form>
+
+    <button th:onclick="'fnModify('+${student.id}+')'">수정</button>
+    <button th:onclick="history.back()">뒤로</button>
+
+    <div th:include="footer :: footerFragment"></div>
+</body>
+</html>

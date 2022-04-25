@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="headerFragment">
+    <div id="header">
+        <span><u>Simpolor</u>님이 접속하였습니다.</span>
+    </div>
+    <hr/>
+</div>
+
+<div th:fragment="headerParamFragment(name)" id="headerParam">
+    <span><u th:text="${name}"></u>님이 접속하였습니다.</span>
+    <hr/>
+</div>
+
+<div th:fragment="headerValueFragment" id="headerValue">
+    <span><u th:text="${name}"></u>님이 접속하였습니다.</span>
+    <hr/>
+</div>
+</body>
+</html>
