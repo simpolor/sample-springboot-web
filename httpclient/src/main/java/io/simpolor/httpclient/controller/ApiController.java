@@ -30,7 +30,7 @@ public class ApiController {
         return new ResultMessage(Boolean.FALSE);
     }
 
-    @PostMapping
+    @PostMapping(produces="application/json;charset=UTF-8")
     public ResultMessage register(@RequestBody StudentMessage request) {
 
         Student student = studentService.create(request.toEntity());

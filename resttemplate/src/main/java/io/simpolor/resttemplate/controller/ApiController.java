@@ -1,17 +1,12 @@
 package io.simpolor.resttemplate.controller;
 
-import io.simpolor.resttemplate.model.ResultDto;
-import io.simpolor.resttemplate.model.StudentDto;
 import io.simpolor.resttemplate.remote.message.ResultMessage;
 import io.simpolor.resttemplate.remote.message.StudentMessage;
 import io.simpolor.resttemplate.repository.entity.Student;
 import io.simpolor.resttemplate.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController

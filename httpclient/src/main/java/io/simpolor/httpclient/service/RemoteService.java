@@ -35,7 +35,7 @@ public class RemoteService {
         return resultMessage.getContent();
     }
 
-    /*public StudentMessage form(Student student) {
+    public StudentMessage form(Student student) {
 
         ResultMessage resultMessage = studentClient.form(StudentMessage.of(student));
         if(Boolean.FALSE.equals(resultMessage.getResult())){
@@ -43,6 +43,6 @@ public class RemoteService {
         }
 
         return resultMessage.getContent();
-    }*/
+    }
 
 }

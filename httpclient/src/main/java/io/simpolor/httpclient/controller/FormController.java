@@ -19,11 +19,20 @@ public class FormController {
 
     private final StudentService studentService;
 
+    /**
+     * 한글깨짐 문제 해결 필요
+     * @param request
+     * @return
+     */
     @ResponseBody
-    @PostMapping("/form")
+    @PostMapping(value="/form", produces="application/json;charset=UTF-8")
     public ResultMessage form(StudentMessage request) {
 
+        System.out.println("request : "+request);
+
         Student student = studentService.create(request.toEntity());
+
+        System.out.println("student : "+student);
 
         return new ResultMessage(StudentMessage.of(student));
     }

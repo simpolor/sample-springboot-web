@@ -43,7 +43,7 @@ public class StudentController {
 		return StudentDto.of(message);
 	}
 
-	@RequestMapping(value="", method=RequestMethod.POST)
+	@RequestMapping(value="", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public ResultDto register(@RequestBody StudentDto request) {
 
 		StudentMessage message = remoteService.create(request.toEntity());
@@ -54,7 +54,7 @@ public class StudentController {
 		return ResultDto.of(message.getStudentId());
 	}
 
-	/*@PostMapping("/form")
+	@PostMapping(value="/form")
 	public ResultDto form(@RequestBody StudentDto request) {
 
 		StudentMessage message = remoteService.form(request.toEntity());
@@ -63,7 +63,7 @@ public class StudentController {
 		}
 
 		return ResultDto.of(message.getStudentId());
-	}*/
+	}
 
 	@RequestMapping(value="/{studentId}", method=RequestMethod.PUT)
 	public void modify(@PathVariable Long studentId,
