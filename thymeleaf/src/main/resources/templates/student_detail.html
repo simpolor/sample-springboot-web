@@ -26,7 +26,7 @@
 <body>
     <div th:include="header :: headerFragment"></div>
 
-    <h1>Student View</h1>
+    <h1>Student Detail</h1>
 
     <form th:id="deleteForm" th:action="@{/delete}" th:method="post">
         <input th:type="hidden" th:name="id" th:value="${student.id}" />
