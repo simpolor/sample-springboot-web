@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    banner-mode: console
+  messages:
+    basename: messages/message
+    encoding: UTF-8
+  devtools:
+    livereload:
+      enabled: true
+  thymeleaf:
+    cache: false

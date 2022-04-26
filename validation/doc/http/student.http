@@ -1,0 +1,171 @@
+# Students 등록 #1
+POST http://127.0.0.1:8080/students
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "박석영",
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "locale": "ko-KR",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Students 등록 #2
+POST http://127.0.0.1:8080/students
+Content-Type: application/json
+
+{
+  "id": 1,
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "locale": "ko-KR",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Students/v1 등록 #1
+POST http://127.0.0.1:8080/students/v1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "박석영",
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Student/v1 등록 #2 ( Custom BadRequestException )
+POST http://127.0.0.1:8080/students/v1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Students/v2 등록 #1
+POST http://127.0.0.1:8080/students/v2
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "박석영",
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Student/v2 등록 #2
+POST http://127.0.0.1:8080/students/v2
+Content-Type: application/json
+
+{
+  "id": 1,
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Students/v3 등록 #1
+POST http://127.0.0.1:8080/students/v3
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "박석영",
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Student/v3 등록 #2
+POST http://127.0.0.1:8080/students/v3
+Content-Type: application/json
+
+{
+  "id": 1,
+  "email": "simpolor@gmail.com",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+
+# Student 등록#3
+POST http://127.0.0.1:8080/students/v1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Student 등록#4
+POST http://127.0.0.1:8080/students
+Content-Type: application/json
+
+{
+  "id": 1,
+  "email": "simpolor@gmail.com",
+  "name": "박석영",
+  "room": "FLOWER",
+  "age": 18,
+  "hobbies": ["축구"]
+}
+
+###
+
+# Student 등록#5
+POST http://127.0.0.1:8080/students
+Content-Type: application/json
+
+{
+  "id": 1,
+  "email": "simpolor@gmail.com",
+  "name": "박석영",
+  "grade": 2,
+  "room": "FLOWER",
+  "age": 18
+}
+
+###

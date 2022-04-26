@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <script>
+        function fnRegister() {
+            document.getElementById("registerForm").submit();
+        }
+    </script>
+    <style>
+        table, tr, th, td {
+            border: 1px solid #000;
+        }
+        .error-msg {
+            color: #FF0000;
+        }
+    </style>
+</head>
+<body>
+<div th:include="header :: header"></div>
+
+    <h1>Student Register</h1>
+
+    <form th:id="registerForm" th:object="${student}" th:action="@{/student/register}" th:method="post">
+        <div>
+            <p>
+                Name : <input th:name="name" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </p>
+            <p>
+                Grade : <input th:name="grade" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}"></span>
+            </p>
+            <p>
+                Age : <input th:name="age" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+            </p>
+            <p>
+                Hobbies : <input th:name="hobbies" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('hobbies')}" th:errors="*{hobbies}"></span>
+            </p>
+        </div>
+
+        <hr />
+    </form>
+
+    <button th:onclick="'fnRegister()'">등록</button>
+    <button th:onclick="history.back()">뒤로</button>
+
+    <div th:include="footer :: footer"></div>
+</body>
+</html>
