@@ -4,50 +4,51 @@
     <meta charset="UTF-8">
     <title>Student List</title>
     <script>
-        function fnRegister() {
+        function fnSubmit() {
             document.getElementById("registerForm").submit();
         }
     </script>
     <style>
-        table, tr, th, td {
-            border: 1px solid #000;
-        }
         .error-msg {
             color: #FF0000;
         }
     </style>
 </head>
 <body>
-<div th:include="header :: header"></div>
-
-    <h1>Student Register</h1>
+    <h1>From</h1>
 
     <form th:id="registerForm" th:object="${student}" th:action="@{/student/register}" th:method="post">
         <div>
             <p>
-                Name : <input th:name="name" />
+                Email : <input th:name="email" th:value="${student.email}" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </p>
+            <p>
+                Name : <input th:name="name" th:value="${student.name}" />
                 <br /><span th:class="error-msg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
             </p>
             <p>
-                Grade : <input th:name="grade" />
+                Grade : <input th:name="grade" th:value="${student.grade}" />
                 <br /><span th:class="error-msg" th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}"></span>
             </p>
             <p>
-                Age : <input th:name="age" />
+                Age : <input th:name="age" th:value="${student.age}" />
                 <br /><span th:class="error-msg" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
             </p>
             <p>
-                Hobbies : <input th:name="hobbies" />
+                Hobbies : <input th:name="hobbies" th:value="${student.hobbies}" />
                 <br /><span th:class="error-msg" th:if="${#fields.hasErrors('hobbies')}" th:errors="*{hobbies}"></span>
+            </p>
+            <p>
+                Classroom : <input th:name="classroom" th:value="${student.classroom}" />
+                <br /><span th:class="error-msg" th:if="${#fields.hasErrors('classroom')}" th:errors="*{classroom}"></span>
             </p>
         </div>
 
         <hr />
     </form>
 
-    <button th:onclick="'fnRegister()'">등록</button>
+    <button th:onclick="fnSubmit()">제출</button>
     <button th:onclick="history.back()">뒤로</button>
-
-    <div th:include="footer :: footer"></div>
 </body>
 </html>

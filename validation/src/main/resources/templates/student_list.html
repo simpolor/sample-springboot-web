@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <script>
+        function fnRegister() {
+            location.href = '/student/register';
+        }
+    </script>
+</head>
+<body>
+    <h1>List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>이메일</th>
+                <th>이름</th>
+                <th>학년</th>
+                <th>나이</th>
+                <th>취미</th>
+                <th>교실</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${studentList.size()} != 0" th:each="student : ${studentList}">
+                <td th:text="${student.id}"></td>
+                <td><a th:text="${student.email}" th:href="@{/detail/{id}(id=${student.id})}"></a></td>
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.grade}"></td>
+                <td th:text="${student.age}"></td>
+                <td th:text="${student.hobbies}"></td>
+                <td th:text="${student.classroom}"></td>
+            </tr>
+
+            <tr th:unless="${studentList.size()} != 0">
+                <td colspan="6">내용 없음</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr />
+
+    <button th:onclick="fnRegister()">등록</button>
+</body>
+</html>
