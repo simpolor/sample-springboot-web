@@ -11,25 +11,25 @@ public enum ServiceResult {
      * 50000 : 시스템
      */
     // @formatter:off
-    SUCCESS (0, "Success"),
-    NOT_FOUND ( 10000,"Not found"),
-    UNKNOWN ( 50000,"Unknown system error");
+    SUCCESS (0, "ok"),
+    NOT_FOUND ( 1000,"Not found"),
+    UNKNOWN ( 5000,"Unknown system error");
     // @formatter:on
 
-    ServiceResult(int resultCode, String resultMessage) {
-        this.resultCode = resultCode;
-        this.resultMessage = resultMessage;
+    ServiceResult(int code, String message) {
+        this.code = code;
+        this.message = message;
     }
 
-    private int resultCode;
+    private int code;
 
-    private String resultMessage;
+    private String message;
 
     public int getResultCode() {
-        return resultCode;
+        return code;
     }
 
     public String getResultMessage() {
-        return resultMessage;
+        return message;
     }
 }

@@ -12,9 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 // @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ServiceResponse {
 
-    private int responseCode = ServiceResult.SUCCESS.getResultCode();
+    private int code = ServiceResult.SUCCESS.getResultCode();
 
-    private String responseMessage = ServiceResult.SUCCESS.getResultMessage();
+    private String message = ServiceResult.SUCCESS.getResultMessage();
 
     private Object result;
 
@@ -29,8 +29,8 @@ public class ServiceResponse {
     public static ServiceResponse of(ServiceException se) {
 
         ServiceResponse response = new ServiceResponse();
-        response.responseCode = se.getResult().getResultCode();
-        response.responseMessage = se.getResult().getResultMessage();
+        response.code = se.getResult().getResultCode();
+        response.message = se.getResult().getResultMessage();
 
         log.warn("ServiceException : {}", se.getMessage());
 
@@ -40,8 +40,8 @@ public class ServiceResponse {
     public static ServiceResponse of(Exception e) {
 
         ServiceResponse response = new ServiceResponse();
-        response.responseCode = ServiceResult.UNKNOWN.getResultCode();
-        response.responseMessage = ServiceResult.UNKNOWN.getResultMessage();
+        response.code = ServiceResult.UNKNOWN.getResultCode();
+        response.message = ServiceResult.UNKNOWN.getResultMessage();
         response.result = e.getMessage();
 
         log.error("Exception : {}", e.getMessage(), e);
