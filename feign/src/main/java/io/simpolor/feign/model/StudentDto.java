@@ -1,66 +1,63 @@
 package io.simpolor.feign.model;
 
-import io.simpolor.feign.remote.message.StudentMessage;
-import io.simpolor.feign.repository.entity.Student;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import io.simpolor.feign.httpclient.model.RemoteDto;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class StudentDto {
 
-	private Long id;
-	private String name;
-	private Integer grade;
-	private Integer age;
-	private List<String> hobbies;
+	@Setter
+	@Getter
+	public static class StudentRequest {
 
-	public Student toEntity(){
+		private String name;
+		private Integer grade;
+		private Integer age;
+		private List<String> hobbies;
 
-		Student student = new Student();
-		student.setStudentId(this.id);
-		student.setName(this.name);
-		student.setGrade(this.grade);
-		student.setAge(this.age);
-		student.setHobbies(this.hobbies);
+		public RemoteDto.RemoteRequest toRequest(){
 
-		return student;
+			RemoteDto.RemoteRequest remoteRequest = new RemoteDto.RemoteRequest();
+			remoteRequest.setName(this.name);
+			remoteRequest.setGrade(this.grade);
+			remoteRequest.setAge(this.age);
+			remoteRequest.setHobbies(this.hobbies);
+
+			return remoteRequest;
+		}
 	}
 
-	public static StudentDto of(Student student){
+	@Setter
+	@Getter
+	public static class StudentResponse {
 
-		StudentDto studentDto = new StudentDto();
-		studentDto.setId(student.getStudentId());
-		studentDto.setName(student.getName());
-		studentDto.setGrade(student.getGrade());
-		studentDto.setAge(student.getAge());
-		studentDto.setHobbies(student.getHobbies());
+		private Long id;
+		private String name;
+		private Integer grade;
+		private Integer age;
+		private List<String> hobbies;
 
-		return studentDto;
+		public static StudentResponse of(RemoteDto.RemoteResponse remoteResponse){
+
+			StudentResponse response = new StudentResponse();
+			response.setId(remoteResponse.getId());
+			response.setName(remoteResponse.getName());
+			response.setGrade(remoteResponse.getGrade());
+			response.setAge(remoteResponse.getAge());
+			response.setHobbies(remoteResponse.getHobbies());
+
+			return response;
+		}
+
+		public static List<StudentResponse> of(List<RemoteDto.RemoteResponse> responses){
+
+			return responses.stream()
+					.map(StudentResponse::of)
+					.collect(Collectors.toList());
+		}
+
 	}
-
-	public static List<StudentDto> of(List<Student> students){
-
-		return students.stream().map(StudentDto::of).collect(Collectors.toList());
-	}
-
-	public static StudentDto of(StudentMessage message){
-
-		StudentDto studentDto = new StudentDto();
-		studentDto.setId(message.getStudentId());
-		studentDto.setName(message.getName());
-		studentDto.setGrade(message.getGrade());
-		studentDto.setAge(message.getAge());
-		studentDto.setHobbies(message.getHobbies());
-
-		return studentDto;
-	}
-
 }

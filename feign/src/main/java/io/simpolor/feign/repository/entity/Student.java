@@ -1,16 +1,14 @@
 package io.simpolor.feign.repository.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class Student {
 
 	private Long studentId;

@@ -24,8 +24,9 @@ public class StudentService {
 
         Optional<Student> optionalStudent = studentRepository.findById(studentId);
         if(!optionalStudent.isPresent()){
-            throw new IllegalArgumentException("studentId : "+studentId);
+            return null;
         }
+
         return optionalStudent.get();
     }
 
@@ -34,16 +35,26 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public void update(Student student) {
+    public Student update(Student student) {
 
-        studentRepository.findById(student.getStudentId())
-                .orElseThrow(() -> new IllegalArgumentException("studentId : "+student.getStudentId()));
+        Optional<Student> optionalStudent = studentRepository.findById(student.getStudentId());
+        if(!optionalStudent.isPresent()){
+            return null;
+        }
 
-        studentRepository.save(student);
+        return studentRepository.save(student);
     }
 
-    public void delete(Long studentId) {
+    public Student delete(Long studentId) {
+
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+        if(!optionalStudent.isPresent()){
+            return null;
+        }
+
         studentRepository.deleteById(studentId);
+
+        return optionalStudent.get();
     }
 
 }

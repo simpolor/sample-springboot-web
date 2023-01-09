@@ -1,11 +1,9 @@
 package io.simpolor.feign.controller;
 
+import io.simpolor.feign.httpclient.RemoteClient;
+import io.simpolor.feign.httpclient.model.RemoteDto;
 import io.simpolor.feign.model.ResultDto;
 import io.simpolor.feign.model.StudentDto;
-import io.simpolor.feign.remote.message.StudentMessage;
-import io.simpolor.feign.repository.entity.Student;
-import io.simpolor.feign.service.RemoteService;
-import io.simpolor.feign.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
@@ -21,61 +19,48 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class StudentController {
 
-	private final StudentService studentService;
-	private final RemoteService remoteService;
+    private final RemoteClient remoteClient;
 
-	@GetMapping
-	public List<StudentDto> list() {
+    @GetMapping
+    public List<StudentDto.StudentResponse> list() {
 
-		List<Student> students = studentService.getAll();
-		if(CollectionUtils.isEmpty(students)){
-			return Collections.EMPTY_LIST;
-		}
+        List<RemoteDto.RemoteResponse> responses = remoteClient.getAll();
+        if(CollectionUtils.isEmpty(responses)){
+            return Collections.EMPTY_LIST;
+        }
 
-		return StudentDto.of(students);
-	}
+        return StudentDto.StudentResponse.of(responses);
+    }
 
-	@GetMapping("/{studentId}")
-	public StudentDto detail(@PathVariable Long studentId) {
+    @GetMapping("/{studentId}")
+    public StudentDto.StudentResponse detail(@PathVariable Long studentId) {
 
-		StudentMessage message = remoteService.get(studentId);
+        RemoteDto.RemoteResponse response = remoteClient.get(studentId);
 
-		return StudentDto.of(message);
-	}
+        return StudentDto.StudentResponse.of(response);
+    }
 
-	@PostMapping
-	public ResultDto register(@RequestBody StudentDto request) {
+    @PostMapping
+    public ResultDto register(@RequestBody StudentDto.StudentRequest request) {
 
-		StudentMessage message = remoteService.create(request.toEntity());
-		if(Objects.isNull(message)){
-			return new ResultDto();
-		}
+        RemoteDto.RemoteResultResponse message = remoteClient.create(request.toRequest());
+        if(Objects.isNull(message)){
+            return ResultDto.ofEmpty();
+        }
 
-		return ResultDto.of(message.getStudentId());
-	}
+        return ResultDto.of(message.getId());
+    }
 
-	@PostMapping("/form")
-	public ResultDto form(@RequestBody StudentDto request) {
+    @PutMapping("/{studentId}")
+    public void modify(@PathVariable Long studentId,
+                       @RequestBody StudentDto.StudentRequest request) {
 
-		StudentMessage message = remoteService.form(request.toEntity());
-		if(Objects.isNull(message)){
-			return new ResultDto();
-		}
+        remoteClient.update(studentId, request.toRequest());
+    }
 
-		return ResultDto.of(message.getStudentId());
-	}
+    @DeleteMapping("/{studentId}")
+    public void delete(@PathVariable Long studentId) {
 
-	@PutMapping("/{studentId}")
-	public void modify(@PathVariable Long studentId,
-					   @RequestBody StudentDto request) {
-
-		request.setId(studentId);
-		studentService.update(request.toEntity());
-	}
-
-	@DeleteMapping("/{studentId}")
-	public void delete(@PathVariable Long studentId) {
-
-		studentService.delete(studentId);
-	}
+        remoteClient.delete(studentId);
+    }
 }
