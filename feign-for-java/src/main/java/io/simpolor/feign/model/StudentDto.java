@@ -1,6 +1,6 @@
 package io.simpolor.feign.model;
 
-import io.simpolor.feign.httpclient.model.RemoteDto;
+import io.simpolor.feign.remote.model.RemoteDto;
 import lombok.Getter;
 import lombok.Setter;
 

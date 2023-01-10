@@ -1,18 +1,15 @@
-package io.simpolor.feign.httpclient.feign;
+package io.simpolor.feign.remote.client;
 
 import io.simpolor.feign.endpoint.model.ServiceResponse;
-import io.simpolor.feign.httpclient.model.RemoteDto;
+import io.simpolor.feign.remote.model.RemoteDto;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * spring 연동이 없는 순수 open feign 설정
  */
-public interface RemoteFeign {
+public interface RemoteClient {
 
     @Headers("Content-Type: application/json")
     @RequestLine("GET /endpoint/students")

@@ -1,14 +1,11 @@
 package io.simpolor.feign.endpoint;
 
 import io.simpolor.feign.endpoint.model.ServiceResponse;
-import io.simpolor.feign.httpclient.model.RemoteDto;
-import io.simpolor.feign.model.ResultDto;
-import io.simpolor.feign.model.StudentDto;
+import io.simpolor.feign.remote.model.RemoteDto;
 import io.simpolor.feign.repository.entity.Student;
 import io.simpolor.feign.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 

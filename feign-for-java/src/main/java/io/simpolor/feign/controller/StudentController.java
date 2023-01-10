@@ -1,7 +1,7 @@
 package io.simpolor.feign.controller;
 
-import io.simpolor.feign.httpclient.RemoteClient;
-import io.simpolor.feign.httpclient.model.RemoteDto;
+import io.simpolor.feign.remote.RemoteService;
+import io.simpolor.feign.remote.model.RemoteDto;
 import io.simpolor.feign.model.ResultDto;
 import io.simpolor.feign.model.StudentDto;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +19,12 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class StudentController {
 
-    private final RemoteClient remoteClient;
+    private final RemoteService remoteService;
 
     @GetMapping
     public List<StudentDto.StudentResponse> list() {
 
-        List<RemoteDto.RemoteResponse> responses = remoteClient.getAll();
+        List<RemoteDto.RemoteResponse> responses = remoteService.getAll();
         if(CollectionUtils.isEmpty(responses)){
             return Collections.EMPTY_LIST;
         }
@@ -35,7 +35,7 @@ public class StudentController {
     @GetMapping("/{studentId}")
     public StudentDto.StudentResponse detail(@PathVariable Long studentId) {
 
-        RemoteDto.RemoteResponse response = remoteClient.get(studentId);
+        RemoteDto.RemoteResponse response = remoteService.get(studentId);
 
         return StudentDto.StudentResponse.of(response);
     }
@@ -43,7 +43,7 @@ public class StudentController {
     @PostMapping
     public ResultDto register(@RequestBody StudentDto.StudentRequest request) {
 
-        RemoteDto.RemoteResultResponse message = remoteClient.create(request.toRequest());
+        RemoteDto.RemoteResultResponse message = remoteService.create(request.toRequest());
         if(Objects.isNull(message)){
             return ResultDto.ofEmpty();
         }
@@ -55,12 +55,12 @@ public class StudentController {
     public void modify(@PathVariable Long studentId,
                        @RequestBody StudentDto.StudentRequest request) {
 
-        remoteClient.update(studentId, request.toRequest());
+        remoteService.update(studentId, request.toRequest());
     }
 
     @DeleteMapping("/{studentId}")
     public void delete(@PathVariable Long studentId) {
 
-        remoteClient.delete(studentId);
+        remoteService.delete(studentId);
     }
 }

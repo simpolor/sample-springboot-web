@@ -1,4 +1,4 @@
-package io.simpolor.feign.httpclient;
+package io.simpolor.feign.remote;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

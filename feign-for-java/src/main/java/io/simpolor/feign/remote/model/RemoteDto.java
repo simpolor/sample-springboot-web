@@ -1,4 +1,4 @@
-package io.simpolor.feign.httpclient.model;
+package io.simpolor.feign.remote.model;
 
 import io.simpolor.feign.repository.entity.Student;
 import lombok.Getter;
