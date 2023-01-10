@@ -30,7 +30,7 @@ public class BoardController {
 	private final BoardService boardService;
 
 	@GetMapping("/list")
-	public ModelAndView listServer(ModelAndView mav,
+	public ModelAndView list(ModelAndView mav,
 								   @PageableDefault(sort={"boardId"}, direction=Sort.Direction.DESC) Pageable pageable) {
 
 		Page<Board> page = boardService.getAll(pageable);
