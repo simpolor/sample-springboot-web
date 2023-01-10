@@ -18,4 +18,10 @@ public class ResultDto {
                 .id(id)
                 .build();
     }
+
+    public static ResultDto ofEmpty(){
+        return ResultDto.builder()
+                .id(null)
+                .build();
+    }
 }
