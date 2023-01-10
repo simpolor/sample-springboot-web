@@ -1,2 +1,10 @@
 server:
   port: 8080
+
+spring:
+  main:
+    banner-mode: console
+
+application:
+  remote:
+    endpoint: http://localhost:8080

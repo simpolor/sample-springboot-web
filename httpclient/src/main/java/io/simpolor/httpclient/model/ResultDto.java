@@ -1,12 +1,10 @@
 package io.simpolor.httpclient.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResultDto {
@@ -16,6 +14,12 @@ public class ResultDto {
     public static ResultDto of(Long id){
         return ResultDto.builder()
                 .id(id)
+                .build();
+    }
+
+    public static ResultDto ofEmpty(){
+        return ResultDto.builder()
+                .id(null)
                 .build();
     }
 }
