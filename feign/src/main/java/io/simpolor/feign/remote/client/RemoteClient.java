@@ -1,7 +1,7 @@
-package io.simpolor.feign.httpclient.feign;
+package io.simpolor.feign.remote.client;
 
 import feign.Headers;
-import io.simpolor.feign.httpclient.model.RemoteDto;
+import io.simpolor.feign.remote.model.RemoteDto;
 import io.simpolor.feign.endpoint.model.ServiceResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * fallbackFactory : hystrix fallback factory를 지정
  */
 @FeignClient(name="remoteClient", url="${application.remote.endpoint}")
-public interface RemoteFeign {
+public interface RemoteClient {
 
     @Headers("Content-Type: application/json")
     @RequestMapping(value="/endpoint/students", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)

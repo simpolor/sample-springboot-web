@@ -1,7 +1,7 @@
 package io.simpolor.feign.controller;
 
-import io.simpolor.feign.httpclient.RemoteClient;
-import io.simpolor.feign.httpclient.model.RemoteDto;
+import io.simpolor.feign.remote.RemoteService;
+import io.simpolor.feign.remote.model.RemoteDto;
 import io.simpolor.feign.model.ResultDto;
 import io.simpolor.feign.model.StudentDto;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class StudentController {
 
-    private final RemoteClient remoteClient;
+    private final RemoteService remoteClient;
 
     @GetMapping
     public List<StudentDto.StudentResponse> list() {

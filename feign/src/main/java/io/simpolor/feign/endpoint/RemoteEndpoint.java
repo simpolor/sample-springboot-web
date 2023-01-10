@@ -1,6 +1,6 @@
 package io.simpolor.feign.endpoint;
 
-import io.simpolor.feign.httpclient.model.RemoteDto;
+import io.simpolor.feign.remote.model.RemoteDto;
 import io.simpolor.feign.endpoint.model.ServiceResponse;
 import io.simpolor.feign.repository.entity.Student;
 import io.simpolor.feign.service.StudentService;

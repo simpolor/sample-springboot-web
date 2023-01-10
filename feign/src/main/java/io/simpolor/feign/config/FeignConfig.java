@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableFeignClients(
         defaultConfiguration = FeignConfig.class,
         basePackages = {
-                "io.simpolor.feign.httpclient.feign"
+                "io.simpolor.feign.remote.client"
         })
 @RequiredArgsConstructor
 public class FeignConfig {

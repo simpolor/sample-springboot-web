@@ -1,12 +1,10 @@
-package io.simpolor.feign.httpclient;
+package io.simpolor.feign.remote;
 
-import com.google.gson.Gson;
-import io.simpolor.feign.httpclient.feign.RemoteFeign;
-import io.simpolor.feign.httpclient.model.RemoteDto;
 import io.simpolor.feign.endpoint.model.ServiceResponse;
+import io.simpolor.feign.remote.client.RemoteClient;
+import io.simpolor.feign.remote.model.RemoteDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -15,22 +13,18 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class RemoteClient {
+public class RemoteService {
 
-    @Value("${application.remote.endpoint}")
-    private String remoteEndpoint;
-
-    private final Gson gson;
-    private final RemoteFeign remoteFeign;
+    private final RemoteClient remoteClient;
 
     public List<RemoteDto.RemoteResponse> getAll() {
 
-        ServiceResponse response = remoteFeign.getAll();
+        ServiceResponse response = remoteClient.getAll();
         if(response.getCode().equals(0)){
 
-            String result = gson.toJson(response.getResult());
+            String result = RemoteUtils.toString(response.getResult());
 
-            return gson.fromJson(result, new ListOfJson<>(RemoteDto.RemoteResponse.class));
+            return RemoteUtils.getList(result, RemoteDto.RemoteResponse.class);
         }
 
         return Collections.EMPTY_LIST;
@@ -38,32 +32,32 @@ public class RemoteClient {
 
     public RemoteDto.RemoteResponse get(Long studentId) {
 
-        ServiceResponse response = remoteFeign.get(studentId);
+        ServiceResponse response = remoteClient.get(studentId);
         if(!response.getCode().equals(0)){
             throw new IllegalArgumentException("Not found studentId: "+ studentId);
         }
 
-        String result = gson.toJson(response.getResult());
+        String result = RemoteUtils.toString(response.getResult());
 
-        return gson.fromJson(result, RemoteDto.RemoteResponse.class);
+        return RemoteUtils.getObject(result, RemoteDto.RemoteResponse.class);
     }
 
     public RemoteDto.RemoteResultResponse create(RemoteDto.RemoteRequest request) {
 
-        ServiceResponse response = remoteFeign.post(request);
+        ServiceResponse response = remoteClient.post(request);
 
         if(!response.getCode().equals(0)){
             throw new IllegalArgumentException("Remote error: "+ request);
         }
 
-        String result = gson.toJson(response.getResult());
+        String result = RemoteUtils.toString(response.getResult());
 
-        return gson.fromJson(result, RemoteDto.RemoteResultResponse.class);
+        return RemoteUtils.getObject(result, RemoteDto.RemoteResultResponse.class);
     }
 
     public void update(Long studentId, RemoteDto.RemoteRequest request) {
 
-        ServiceResponse response = remoteFeign.put(studentId, request);
+        ServiceResponse response = remoteClient.put(studentId, request);
         if(!response.getCode().equals(0)){
             throw new IllegalArgumentException("Not found studentId: "+ studentId);
         }
@@ -71,7 +65,7 @@ public class RemoteClient {
 
     public void delete(Long studentId) {
 
-        ServiceResponse response = remoteFeign.delete(studentId);
+        ServiceResponse response = remoteClient.delete(studentId);
         if(!response.getCode().equals(0)){
             throw new IllegalArgumentException("Not found studentId: "+ studentId);
         }
