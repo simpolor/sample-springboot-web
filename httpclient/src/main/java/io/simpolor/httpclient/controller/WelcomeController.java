@@ -10,6 +10,6 @@ public class WelcomeController {
     @RequestMapping({"/", "/index", "/welcome"})
     @ResponseBody
     public String welcome() {
-        return "httpClient";
+        return "HttpClient";
     }
 }
