@@ -11,6 +11,6 @@ public class WelcomeController {
     @ResponseBody
     public String welcome() {
 
-        return "Springboot Sample H2 Database";
+        return "Pageable";
     }
 }
