@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pageable</title>
+
+    <style>
+        .student-detail { width: 1000px; padding: 5px }
+        .student-detail .text-field { width: 100%; height: 40px; line-height: 40px; border: 1px #ddd solid; }
+        .student-detail .buttons { margin-top: 10px; text-align: right; }
+    </style>
+
+    <script>
+        function fnDelete(){
+            document.getElementById("studentForm").submit();
+        }
+    </script>
+
+</head>
+<body>
+    <h1>Pageable</h1>
+
+    <div class="student-detail">
+        <div class="text-field">
+            <span th:if="${not #strings.isEmpty(student)}" th:text="${student.name}"></span>
+        </div>
+        <div class="text-field">
+            <span th:if="${not #strings.isEmpty(student)}" th:utext="${student.grade}"></span>
+        </div>
+        <div class="text-field">
+            <span th:if="${not #strings.isEmpty(student)}" th:utext="${student.age}"></span>
+        </div>
+
+        <form th:id="studentForm" th:action="@{/student/delete/{id}(id=${student.id})}" th:method="post" th:object="${student}"></form>
+
+        <div class="buttons">
+            <a th:href="@{/student/list}"><button>목록</button></a>
+            <button onclick="fnDelete()">삭제</button>
+            <a th:href="@{/student/modify/{id}(id=${student.id})}"><button>수정</button></a>
+        </div>
+    </div>
+</body>
+</div>
+</html>

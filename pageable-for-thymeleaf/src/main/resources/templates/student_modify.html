@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pageable</title>
+
+    <style>
+        . { margin: 0; padding: 0; }
+        .student-form { width: 1000px; padding: 5px }
+        .student-form .title { width: 100%; height: 40px; }
+        .student-form .title>input { width: 100%; height: 30px; }
+        .student-form .buttons { margin-top: 10px; text-align: right; }
+    </style>
+    <script>
+        function fnSubmit() {
+            document.getElementById("studentForm").submit();
+        }
+    </script>
+</head>
+<body>
+    <h1>Pageable</h1>
+
+    <div class="student-form">
+        <form th:id="studentForm" th:action="@{/student/modify/{id}(id=${student.id})}" th:method="post" th:object="${student}">
+            <div class="title">
+                <input th:name="name" th:type="text" th:field="${student.name}" />
+            </div>
+            <div class="title">
+                <input th:name="grade" th:type="text" th:field="${student.grade}" />
+            </div>
+            <div class="title">
+                <input th:name="age" th:type="text" th:field="${student.age}" />
+            </div>
+        </form>
+        <div class="buttons">
+            <a th:href="@{/student/list}"><button>목록</button></a>
+            <a th:href="@{/student/detail/{id}(id=${student.id})}"><button>취소</button></a>
+            <button onclick="fnSubmit()">제출</button>
+        </div>
+    </div>
+</body>
+</div>
+</html>
