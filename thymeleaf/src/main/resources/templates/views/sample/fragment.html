@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+    <h1>Fragment</h1>
+    th:insert: 지정된 조각을 호스트 태그의 본문으로 삽입하기만 하면 됩니다.
+    th:replace: 실제로 해당 호스트 태그를 지정된 조각으로 바꿉니다 .
+    th:include: th:insert와 유사 하지만 프래그먼트를 삽입하는 대신 이 프래그먼트의 내용만 삽입합니다 .
+
+    <h2>th:include</h2>
+    <div th:include="views/sample/fragments/header :: headerFragment"></div>
+
+    <h2>th:insert</h2>
+    <div th:insert="views/sample/fragments/header :: headerFragment"></div>
+
+    <h2>th:replace</h2>
+    <div th:replace="views/sample/fragments/header :: headerFragment"></div>
+
+    <h2>~{ }</h2>
+    <div th:include="~{views/sample/fragments/header :: headerFragment}"></div>
+
+    <h2>#id</h2>
+    <div th:include="views/sample/fragments/header :: #header"></div>
+
+    <h2>$parameter</h2>
+    <div th:include="views/sample/fragments/header :: headerParamFragment(${studentId}, ${studentName})"></div>
+
+    <h2>~{::parameter}</h2>
+    <div th:include="views/sample/fragments/header :: headerParamFragment(~{::studentId}, ~{::studentName})"></div>
+
+    <h2>~{::empty parameter}</h2>
+    <div th:include="views/sample/fragments/header :: headerParamFragment(~{::studentId}, ~{})"></div>
+
+    <h2>no-op</h2>
+    <div th:include="views/sample/fragments/header :: headerParamFragment(~{::studentId}, _)"></div>
+
+    <h2>$parameter name</h2>
+    <div th:include="views/sample/fragments/header :: headerParamFragment(id=${studentId}, name=${studentName})"></div>
+
+    <h2>condition</h2>
+    <div th:include="${!#strings.isEmpty(studentName)} ? ~{views/sample/fragments/header :: headerParamFragment(id=${studentId}, name=${studentName})} : ~{}"></div>
+
+    <h2>attribute</h2>
+    <div th:include="views/sample/fragments/header :: ${fragName}"></div>
+
+    <h2>assert</h2>
+    <div th:include="views/sample/fragments/header :: headerAssertFragment(${studentName})"></div>
+
+    <h2>th:with, th:insert</h2>
+    <div th:with="frag=~{views/sample/fragments/header :: headerFragment}">
+        <div th:insert="${frag}"></div>
+    </div>
+
+    <h2>th:with, th:replace</h2>
+    <div th:with="frag=~{views/sample/fragments/header :: headerFragment}">
+        <div th:replace="views/sample/fragments/header :: headerInheritanceFragment(${frag})"></div>
+    </div>
+
+</body>
+</html>

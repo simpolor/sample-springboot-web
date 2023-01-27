@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        table, tr, th, td {
+            border: 1px solid #000;
+            width: 500px;
+        }
+    </style>
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <script>
+        function fnSubmit() {
+            document.getElementById("deleteForm").submit();
+        }
+
+        function fnModify(id) {
+            location.href = '/student/modify/'+id;
+        }
+
+        function fnList() {
+            location.href = '/student/list';
+        }
+
+    </script>
+</th:block>
+
+<div layout:fragment="content">
+
+    <h1>Student Detail</h1>
+
+    <form th:id="deleteForm" th:action="@{/student/delete/{id}(id=${student.id})}" th:object="${student}" th:method="post">
+        <p>StudentId : <span th:text="*{id}">1</span></p>
+        <p>Name : <span th:text="*{age}"></span></p>
+        <p>Grade : <span th:text="*{grade}"></span></p>
+        <p>Age : <span th:text="*{age}"></span></p>
+        <p>Hobbies : </p>
+        <p th:each="hobby : *{hobbies}">
+            <span th:text="${hobby}" /><br />
+        </p>
+
+        <hr />
+
+        <p>StudentId : <span th:text="${student.id}"></span></p>
+        <p>Name : <span th:text="${student.name}"></span></p>
+        <p>Grade : <span th:text="${student.grade}"></span></p>
+        <p>Age : <span th:text="${student.age}"></span></p>
+        <p>Hobbies : </p>
+        <p th:each="hobby : ${student.hobbies}">
+            <span th:text="${hobby}" /><br />
+        </p>
+    </form>
+
+    <hr />
+
+    <button th:onclick="'fnModify('+${student.id}+')'">수정</button>
+    <button th:onclick="fnSubmit()">삭제</button>
+    <button th:onclick="fnList()">목록</button>
+
+</div>
+
+</html>

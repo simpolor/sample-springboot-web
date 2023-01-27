@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/default">
+
+    <!-- index.html 고유 CSS 추가 -->
+    <th:block layout:fragment="css">
+        <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}">
+        <style>
+            table, tr, th, td {
+                border: 1px solid #000;
+                width: 500px;
+            }
+        </style>
+    </th:block>
+
+    <!-- index.html 고유 스크립트 추가 -->
+    <th:block layout:fragment="script">
+        <script>
+            function fnRegister() {
+                /*<![CDATA[*/
+                location.href =  '[[@{/student/register}]]';
+                /*]]>*/
+            }
+        </script>
+    </th:block>
+
+    <div layout:fragment="content">
+
+        <h1>Student List</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>StudentId</th>
+                    <th>Name</th>
+                    <th>Grade</th>
+                    <th>Age</th>
+                    <th>Hobby</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.id}"></td>
+                    <td><a th:text="${student.name}" th:href="@{/student/detail/{id}(id=${student.id})}"></a></td>
+                    <td th:text="${student.grade}"></td>
+                    <td th:text="${student.age}"></td>
+                    <td>
+                        <th:block th:each="hobby, status: ${student.hobbies}">
+                            <th:block th:if="${!status.last}" th:text="|${hobby}, |"></th:block>
+                            <th:block th:if="${status.last}" th:text="${hobby}"></th:block>
+                        </th:block>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <button th:onclick="fnRegister()">등록</button>
+
+    </div>
+
+</html>

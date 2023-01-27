@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+    <h1>Utility</h1>
+
+    <h2>#numbers</h2>
+    <div>
+        #numbers.sequence:
+        <th:block th:each="num : ${#numbers.sequence(1,5)}">
+            <span th:text="${num}"></span>
+        </th:block><br />
+        #numbers.formatInteger[DEFAULT=COMMA]: <span th:text="${#numbers.formatInteger(23, 6, 'DEFAULT')}">0.99</span><br />
+        #numbers.formatInteger[POINT]: <span th:text="${#numbers.formatInteger(23, 6, 'POINT')}">0.99</span><br />
+        #numbers.formatInteger[WHITESPACE]: <span th:text="${#numbers.formatInteger(23, 6, 'WHITESPACE')}">0.99</span><br />
+        #numbers.formatInteger[NONE]: <span th:text="${#numbers.formatInteger(23, 6, 'NONE')}">0.99</span><br />
+        #numbers.formatDecimal: <span th:text="${#numbers.formatDecimal(23, 6, 2)}">0.99</span><br />
+    </div>
+    <hr />
+
+    <h2>#calendars</h2>
+    <div>
+        #calendars.format: <span th:text="${#calendars.format(#dates.createNow(), 'dd MMMM yyyy')}">13 february 2011</span><br />
+    </div>
+    <hr />
+
+    <h2>#aggregates</h2>
+    <div>
+        #aggregates.sum: <span th:text="${#aggregates.sum(#numbers.sequence(1,5))}">14</span><br />
+    </div>
+    <hr />
+
+    <h2>#uris</h2>
+    <div>
+        #uris.escapePath: <span th:text="${#uris.escapePath('https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#messages?param=값')}">homepage</span><br />
+        #uris.unescapePath: <span th:text="${#uris.unescapePath('https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#messages?param=값')}">homepage</span><br />
+        #uris.unescapeQueryParam: <span th:text="${#uris.escapeQueryParam('https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#messages?param=값')}">homepage</span><br />
+    </div>
+    <hr />
+
+    <h2>#maps</h2>
+    <div>
+        #maps.size: <span th:text="${#maps.size(studentMap)}">studentMap</span><br />
+        #maps.containsKey: <span th:text="${#maps.containsKey(studentMap, 'studentName')}">studentMap</span><br />
+    </div>
+    <hr />
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/html" layout:decorate="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        table, tr, th, td {
+            border: 1px solid #000;
+            width: 500px;
+        }
+    </style>
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <script>
+        function fnSubmit() {
+            document.getElementById("studentForm").submit();
+        }
+
+        function fnAddHobbies(){
+            const addHobbies = document.getElementById("addHobbies");
+            addHobbies.insertAdjacentHTML(
+                'beforeend',
+                '<input name="hobbies" /><br />'
+            );
+        }
+
+    </script>
+</th:block>
+
+<div layout:fragment="content">
+
+    <h1>Student Register</h1>
+
+    <form th:id="studentForm" th:action="@{/student/register}" th:method="post">
+        <p>Name : <input th:name="name" /></p>
+        <p>Grade : <input name="grade" /></p>
+        <p>Age : <input name="age" /></p>
+        <p>Hobbies : <input th:onclick="fnAddHobbies()" type="button" value="추가" /></p>
+        <p id="addHobbies">
+            <input th:name="hobbies" /><br />
+        </p>
+
+    </form>
+
+    <hr />
+
+    <button onclick="fnSubmit()">등록</button>
+    <button onclick="history.back()">뒤로</button>
+</div>
+
+</html>

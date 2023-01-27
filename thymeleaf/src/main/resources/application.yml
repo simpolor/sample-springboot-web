@@ -1,7 +1,5 @@
 server:
   port: 8080
-  servlet:
-    context-path: /student
 
 spring:
   main:
@@ -16,10 +14,13 @@ spring:
     cache: false
     prefix: classpath:templates/
     suffix: .html
-    mode: HTML5
+    mode: HTML
     encoding: UTF-8
 
 jsf:
   primefaces:
     FONT_AWESOME: true
 
+logging:
+  level:
+    org.thymeleaf: DEBUG

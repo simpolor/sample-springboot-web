@@ -1,8 +1,12 @@
 package io.simpolor.thymeleaf.controller;
 
 import io.simpolor.thymeleaf.model.StudentDto;
+import io.simpolor.thymeleaf.repository.entity.Student;
+import io.simpolor.thymeleaf.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -10,115 +14,95 @@ import java.util.*;
 
 @Slf4j
 @Controller
+@RequestMapping("/student")
+@RequiredArgsConstructor
 public class StudentController {
 
-	@RequestMapping(value="/layout")
-	public ModelAndView studentLayout(ModelAndView mav) {
-		mav.setViewName("student/student");
+	private final StudentService studentService;
+
+	@GetMapping("/list")
+	public ModelAndView list(ModelAndView mav) {
+
+		List<Student> students = studentService.getAll();
+
+		List<StudentDto.StudentResponse> responses = new ArrayList<>();
+		if(!CollectionUtils.isEmpty(students)){
+			responses = StudentDto.StudentResponse.of(students);
+		}
+
+		mav.addObject("students", responses);
+		mav.setViewName("/views/student/student_list");
 
 		return mav;
 	}
 
-	@RequestMapping(value="/guide")
-	public ModelAndView guide(ModelAndView mav) {
+	@GetMapping("/detail/{studentId}")
+	public ModelAndView detail(ModelAndView mav, @PathVariable Long studentId) {
 
-		List<String> classRoomList = new ArrayList<>();
-		classRoomList.add("햇님반");
-		classRoomList.add("꽃님반");
-		classRoomList.add("단순반");
+		Student student = studentService.get(studentId);
 
-		Map<Integer, String> classRoomMap = new HashMap<>();
-		classRoomMap.put(0, "햇님반");
-		classRoomMap.put(1, "꽃님반");
-		classRoomMap.put(2, "단순반");
+		StudentDto.StudentResponse response = new StudentDto.StudentResponse();
+		if(Objects.nonNull(student)){
+			response = StudentDto.StudentResponse.of(student);
+		}
 
-		List<StudentDto> studentList = new ArrayList<>();
-		studentList.add(new StudentDto(1L, "단순색", 1, 17, Arrays.asList("축구")));
-		studentList.add(new StudentDto(2L, "김영희", 2, 18, Arrays.asList("영화", "프로그래밍")));
-		studentList.add(new StudentDto(3L, "홍길동", 3, 19, Arrays.asList("야구 관람")));
-		studentList.add(new StudentDto(4L, "제임스", 2, 18, Arrays.asList("맛집 탐방", "미식")));
-		studentList.add(new StudentDto(5L, "김철수", 1, 17, Arrays.asList("명상")));
-
-		mav.addObject("classRoomList", classRoomList);
-		mav.addObject("classRoomMap", classRoomMap);
-		mav.addObject("studentList", studentList);
-		mav.addObject("studentId", 1);
-		mav.addObject("studentName", "홍길동");
-		mav.addObject("isStudent", true);
-		mav.addObject("totalcount", 5);
-		mav.setViewName("guide");
+		mav.addObject("student", response);
+		mav.setViewName("/views/student/student_detail");
 
 		return mav;
 	}
 
-	@RequestMapping(value="/list")
-	public ModelAndView studentList(ModelAndView mav) {
-
-		List<StudentDto> students = new ArrayList<>();
-		students.add(new StudentDto(1L, "단순색", 1, 17, Arrays.asList("축구")));
-		students.add(new StudentDto(2L, "김영희", 2, 18, Arrays.asList("영화", "프로그래밍")));
-		students.add(new StudentDto(3L, "홍길동", 3, 19, Arrays.asList("야구 관람")));
-		students.add(new StudentDto(4L, "제임스", 2, 18, Arrays.asList("맛집 탐방", "미식")));
-		students.add(new StudentDto(5L, "김철수", 1, 17, Arrays.asList("명상")));
-
-		mav.addObject("totalcount", 5);
-		mav.addObject("list", students);
-		mav.setViewName("student_list");
-
-		return mav;
-	}
-
-	@RequestMapping(value="/detail/{id}", method=RequestMethod.GET)
-	public ModelAndView detail(ModelAndView mav, @PathVariable Long id) {
-
-		log.info("Student detail id : {}", id);
-
-		StudentDto student = new StudentDto(id, "단순색", 1, 17, Arrays.asList("축구"));
-
-		mav.addObject("student", student);
-		mav.setViewName("student_detail");
-
-		return mav;
-	}
-
-	@RequestMapping(value="/register", method=RequestMethod.GET)
+	@GetMapping("/register")
 	public ModelAndView registerForm(ModelAndView mav) {
 
-		mav.setViewName("student_register");
+		mav.setViewName("/views/student/student_register");
 		return mav;
 	}
 
-	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public ModelAndView register(ModelAndView mav, StudentDto requset) {
+	@PostMapping("/register")
+	public ModelAndView register(ModelAndView mav, StudentDto.StudentRequest requset) {
 
-		mav.addObject("student", requset);
-		mav.setViewName("redirect:/detail/1");
+		Student student = studentService.create(requset.toEntity());
+
+		mav.setViewName("redirect:/student/detail/"+student.getStudentId());
 		return mav;
 	}
 
-	@RequestMapping(value="/modify/{id}", method=RequestMethod.GET)
-	public ModelAndView modifyForm(ModelAndView mav, @PathVariable Long id) {
+	@GetMapping("/modify/{studentId}")
+	public ModelAndView modifyForm(ModelAndView mav,
+								   @PathVariable Long studentId) {
 
-		StudentDto student = new StudentDto(id, "단순색", 1, 17, Arrays.asList("축구"));
+		Student student = studentService.get(studentId);
 
-		mav.addObject("student", student);
-		mav.setViewName("student_modify");
+		StudentDto.StudentResponse response = new StudentDto.StudentResponse();
+		if(Objects.nonNull(student)){
+			response = StudentDto.StudentResponse.of(student);
+		}
+
+		mav.addObject("student", response);
+		mav.setViewName("/views/student/student_modify");
 
 		return mav;
 	}
 
-	@RequestMapping(value="/modify", method=RequestMethod.POST)
-	public ModelAndView modify(ModelAndView mav, StudentDto student) {
+	@PostMapping("/modify/{studentId}")
+	public ModelAndView modify(ModelAndView mav,
+							   @PathVariable Long studentId,
+							   StudentDto.StudentRequest request) {
 
-		mav.addObject("student", student);
-		mav.setViewName("redirect:/detail/"+student.getId());
+		studentService.update(request.toEntity(studentId));
+
+		mav.setViewName("redirect:/student/detail/"+studentId);
 		return mav;
 	}
 
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public ModelAndView studentDelete(ModelAndView mav, @RequestParam("id") Long id) {
+	@PostMapping("/delete/{studentId}")
+	public ModelAndView delete(ModelAndView mav,
+							   @PathVariable("studentId") Long studentId) {
 
-		mav.setViewName("redirect:/list");
+		studentService.delete(studentId);
+
+		mav.setViewName("redirect:/student/list");
 		return mav;
 	}
 

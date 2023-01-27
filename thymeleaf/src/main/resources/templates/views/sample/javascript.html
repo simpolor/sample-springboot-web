@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+    <script>
+        var studnet_name = '[[${studentName}]]';
+
+        /*<![CDATA[*/
+        var studentName = /*[[${studentName}]]*/'홍길녀'; // 위의 방법이 오류로 인식될 때 사용
+        alert('안녕하세요. '+studentName+'입니다.');
+        /*]]>*/
+    </script>
+
+    <script th:inline="javascript">
+        var studentName = [[${student.name}]];
+
+        // student 객체가 toString 된 결과
+        var student = [[${student}]];
+    </script>
+</head>
+<body>
+    <h1>Javascript</h1>
+
+</body>
+</html>
