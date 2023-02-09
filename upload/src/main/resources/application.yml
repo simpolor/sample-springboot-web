@@ -1,0 +1,16 @@
+spring:
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+  thymeleaf:
+    cache: false
+    prefix: classpath:templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+
+application:
+  upload:
+    # path: D:/upload
+    # path: /Users/simpolor/upload
+    path: /Users/parksy/temp2

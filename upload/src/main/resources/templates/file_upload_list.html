@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>File</title>
+</head>
+<body>
+    <h1>File</h1>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>originFileName</th>
+            <th>savedFileName</th>
+            <th>extension</th>
+            <th>size</th>
+        </tr>
+        <tr th:if="${fileUploadList}" th:each="fileUpload : ${fileUploadList}">
+            <td th:text="${fileUpload.id}"></td>
+            <td th:text="${fileUpload.originFileName}"></td>
+            <td th:text="${fileUpload.savedFileName}"></td>
+            <td th:text="${fileUpload.extension}"></td>
+            <td th:text="${fileUpload.size}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>
