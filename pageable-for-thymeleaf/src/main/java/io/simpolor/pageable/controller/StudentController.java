@@ -5,10 +5,14 @@ import io.simpolor.pageable.repository.entity.Student;
 import io.simpolor.pageable.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/student")
@@ -23,7 +27,14 @@ public class StudentController {
 
 		Page<Student> page = studentService.getAll(pageable);
 
-		mav.addObject("studentList", StudentDto.of(page.getContent()));
+		Page<StudentDto> newPage =
+				new PageImpl(
+						page.stream().map(StudentDto::of).collect(Collectors.toList()),
+						page.getPageable(),
+						page.getTotalElements());
+
+		mav.addObject("page", newPage);
+
 		mav.setViewName("student_list");
 
 		return mav;

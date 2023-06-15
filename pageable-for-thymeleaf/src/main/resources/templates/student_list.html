@@ -32,10 +32,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:if="${studentList.isEmpty()}">
+                <tr th:if="${page.isEmpty}">
                     <td colspan="4" style="text-align: center">데이터 없음</td>
                 </tr>
-                <tr th:if="${not #strings.isEmpty(studentList)}" th:each="student: ${studentList}">
+                <tr th:unless="${page.isEmpty}" th:each="student: ${page.content}">
                     <td th:text="${student.id}" class="text-center"></td>
                     <td><a th:href="@{/student/detail/{id}(id=${student.id})}" th:text="${student.name}"></a></td>
                     <td th:text="${student.grade}"></td>
@@ -47,6 +47,32 @@
         <div class="buttons">
             <a th:href="@{/student/register}"><button>등록</button></a>
         </div>
+
+        <div class="pagination">
+            <ul>
+                <li th:classappend="${pageable.first ? 'disabled' : ''}">
+                    <a th:if="${not pageable.first}" th:href="@{${#httpServletRequest.requestURI}(size=${pageable.pageSize}, page=0)}">&laquo;</a>
+                    <a th:if="${pageable.first}" href="#">&laquo;</a>
+                </li>
+                <li th:classappend="${pageable.hasPrevious ? '' : 'disabled'}">
+                    <a th:if="${pageable.hasPrevious}" th:href="@{${#httpServletRequest.requestURI}(size=${pageable.pageSize}, page=${pageable.previousOrFirstPageable().pageNumber}))}">&lsaquo;</a>
+                    <a th:if="${not pageable.hasPrevious}" href="#">&lsaquo;</a>
+                </li>
+                <li th:each="page : ${#numbers.sequence(0, pageable.totalPages-1)}" th:classappend="${pageable.number == page ? 'active' : ''}">
+                    <a th:if="${pageable.number != page}" th:href="@{${#httpServletRequest.requestURI}(size=${pageable.pageSize}, page=${page}))}" th:text="${page + 1}"></a>
+                    <span th:if="${pageable.number == page}" th:text="${page + 1}"></span>
+                </li>
+                <li th:classappend="${pageable.hasNext ? '' : 'disabled'}">
+                    <a th:if="${pageable.hasNext}" th:href="@{${#httpServletRequest.requestURI}(size=${pageable.pageSize}, page=${pageable.nextPageable().pageNumber}))}">&rsaquo;</a>
+                    <a th:if="${not pageable.hasNext}" href="#">&rsaquo;</a>
+                </li>
+                <li th:classappend="${pageable.last ? 'disabled' : ''}">
+                    <a th:if="${not pageable.last}" th:href="@{${#httpServletRequest.requestURI}(size=${pageable.pageSize}, page=${pageable.lastPageable().pageNumber}))}">&raquo;</a>
+                    <a th:if="${pageable.last}" href="#">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+
     </div>
 
 </body>
