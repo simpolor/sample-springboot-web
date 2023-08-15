@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Collections;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/student")
@@ -27,13 +27,15 @@ public class StudentController {
 
 		Page<Student> page = studentService.getAll(pageable);
 
-		Page<StudentDto> newPage =
-				new PageImpl(
-						page.stream().map(StudentDto::of).collect(Collectors.toList()),
-						page.getPageable(),
-						page.getTotalElements());
+		List<StudentDto.StudentResponse> contentResponses = new ArrayList<>();
+		if(!page.isEmpty()){
+			contentResponses = StudentDto.StudentResponse.of(page.getContent());
+		}
 
-		mav.addObject("page", newPage);
+		Page<StudentDto.StudentResponse> pageResponse =
+				new PageImpl<>(contentResponses, page.getPageable(), page.getTotalElements());
+
+		mav.addObject("pageable", pageResponse);
 
 		mav.setViewName("student_list");
 
@@ -46,7 +48,7 @@ public class StudentController {
 
 		Student student = studentService.get(studentId);
 
-		mav.addObject("student", StudentDto.of(student));
+		mav.addObject("student", StudentDto.StudentResponse.of(student));
 		mav.setViewName("student_detail");
 
 		return mav;
@@ -62,13 +64,13 @@ public class StudentController {
 
 	@PostMapping("/register")
 	public ModelAndView register(ModelAndView mav,
-								 StudentDto studentDto) {
+								 StudentDto.StudentRequest request) {
 
-		Student student = studentService.create(studentDto.toEntity());
+		Student student = studentService.create(request.toEntity());
 
 		System.out.println("student : "+student);
 
-		mav.addObject("student", StudentDto.of(student));
+		mav.addObject("student", StudentDto.StudentResponse.of(student));
 		mav.setViewName("redirect:/student/detail/"+student.getStudentId());
 
 		return mav;
@@ -80,7 +82,7 @@ public class StudentController {
 
 		Student student = studentService.get(studentId);
 
-		mav.addObject("student", StudentDto.of(student));
+		mav.addObject("student", StudentDto.StudentResponse.of(student));
 		mav.setViewName("student_modify");
 
 		return mav;
@@ -89,10 +91,10 @@ public class StudentController {
 	@PostMapping("/modify/{studentId}")
 	public ModelAndView modify(@PathVariable Long studentId,
 							   ModelAndView mav,
-							   StudentDto studentDto) {
+							   StudentDto.StudentRequest request) {
 
-		studentDto.setId(studentId);
-		studentService.update(studentDto.toEntity());
+		request.setId(studentId);
+		studentService.update(request.toEntity());
 
 		mav.setViewName("redirect:/student/detail/"+studentId);
 

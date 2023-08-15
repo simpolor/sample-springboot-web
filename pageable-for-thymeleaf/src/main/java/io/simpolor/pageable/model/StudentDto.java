@@ -7,41 +7,58 @@ import lombok.Setter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Setter
-@Getter
 public class StudentDto {
 
-	private Long id;
-	private String name;
-	private Integer grade;
-	private Integer age;
+	@Setter
+	@Getter
+	public static class StudentRequest {
+		private Long id;
+		private String name;
+		private Integer grade;
+		private Integer age;
 
-	public Student toEntity(){
+		public Student toEntity(){
 
-		Student student = new Student();
-		student.setStudentId(this.id);
-		student.setName(this.name);
-		student.setGrade(this.grade);
-		student.setAge(this.age);
+			Student student = new Student();
+			student.setStudentId(this.id);
+			student.setName(this.name);
+			student.setGrade(this.grade);
+			student.setAge(this.age);
 
-		return student;
+			return student;
+		}
 	}
 
-	public static StudentDto of(Student student){
+	@Setter
+	@Getter
+	public static class StudentResponse {
 
-		StudentDto studentDto = new StudentDto();
-		studentDto.setId(student.getStudentId());
-		studentDto.setName(student.getName());
-		studentDto.setGrade(student.getGrade());
-		studentDto.setAge(student.getAge());
+		private Long id;
+		private String name;
+		private Integer grade;
+		private Integer age;
 
-		return studentDto;
+		public static StudentResponse of(Student student){
+
+			StudentResponse response = new StudentResponse();
+			response.setId(student.getStudentId());
+			response.setName(student.getName());
+			response.setGrade(student.getGrade());
+			response.setAge(student.getAge());
+
+			return response;
+		}
+
+		public static List<StudentResponse> of(List<Student> students){
+
+			return students.stream()
+					.map(StudentResponse::of)
+					.collect(Collectors.toList());
+		}
+
 	}
 
-	public static List<StudentDto> of(List<Student> students){
 
-		return students.stream()
-				.map(StudentDto::of)
-				.collect(Collectors.toList());
-	}
+
+
 }
