@@ -17,6 +17,11 @@ spring:
     mode: HTML
     encoding: UTF-8
 
+
+application:
+  serverInfo:
+    baseUrl: localhost:8080
+
 jsf:
   primefaces:
     FONT_AWESOME: true

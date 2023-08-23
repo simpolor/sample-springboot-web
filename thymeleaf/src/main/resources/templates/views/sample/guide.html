@@ -261,5 +261,12 @@
     </div>
     <hr />
 
+    <h2>Java class</h2>
+    <div>
+        현재 URL 주소입니다. <span th:text="${@urlComponent.getBaseUrl()}"></span>입니다.<br />
+        이미지 주소입니다. <span th:text="${@urlComponent.getFullUrl('/images/logo.png')}"></span>입니다.<br />
+    </div>
+    <hr />
+
 </body>
 </html>
