@@ -62,6 +62,7 @@
         PathVariable: <a th:text="${studentName}" th:href="@{/student/detail/{id}(id=${studentId})}"></a><br />
         httpServletRequest.requestURL: <a th:text="${studentName}" th:href="@{__${#httpServletRequest.requestURL}__}"></a><br />
         httpServletRequest.requestURI: <a th:text="${studentName}" th:href="@{|${#httpServletRequest.requestURI}/student|}"></a><br />
+        httpServletRequest.fullURL <a th:text="${studentName}" th:href="|${#httpServletRequest.scheme}://${#httpServletRequest.serverName}:${#httpServletRequest.serverPort}@{/images/logo.png}|"></a><br />
     </div>
     <hr />
 
