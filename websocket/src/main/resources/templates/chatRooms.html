@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Rooms</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js" integrity="sha512-hsqWiVBsPC5Hz9/hy5uQX6W6rEtBjtI8vyOAR4LAFpZAbQjJ43uIdmKsA7baQjM318sf8BBqrMkcWsfSsaWCNg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function createRoom() {
+            var roomName = document.getElementById("roomName").value;
+            if (roomName) {
+                fetch("/api/chat/room", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ name: roomName })  // JSON 형식으로 보냄
+                })
+                .then(response => response.json())
+                .then(room => {
+                    var roomList = document.getElementById("roomList");
+                    var li = document.createElement("li");
+                    li.innerHTML = `<a href="/chat/${room.id}">${room.name}</a>`;
+                    roomList.appendChild(li);
+                })
+                .catch(error => console.error("Error:", error));
+            }
+        }
+
+        function fetchRooms() {
+            fetch("/api/chat/rooms")
+                .then(response => response.json())
+                .then(rooms => {
+                    var roomList = document.getElementById("roomList");
+                    roomList.innerHTML = "";  // 기존 목록 초기화
+                    rooms.forEach(room => {
+                        var li = document.createElement("li");
+                        li.innerHTML = `<a href="/chat/${room.id}">${room.name}</a>`;
+                        roomList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error("Error:", error));
+        }
+
+        window.onload = fetchRooms;
+    </script>
+</head>
+<body>
+    <h2>Chat Rooms</h2>
+    <input type="text" id="roomName" placeholder="Enter room name" />
+    <button onclick="createRoom()">Create Room</button>
+    <ul id="roomList">
+        <li th:each="room : ${rooms}">
+            <a th:href="@{/chat/{roomId}(roomId=${room.id})}" th:text="${room.name}"></a>
+        </li>
+    </ul>
+</body>
+</html>

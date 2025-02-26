@@ -1,16 +1,25 @@
 package io.simpolor.websocket.controller;
 
+import io.simpolor.websocket.model.ChatMessage;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ChatController {
 
-    @GetMapping("/chat")
-    public ModelAndView chat(ModelAndView mav) {
+    // 채팅방 별로 메시지 처리
+    @MessageMapping("/chat/{roomId}/sendMessage")
+    @SendTo("/topic/chat/{roomId}")
+    public ChatMessage sendMessage(@DestinationVariable String roomId, ChatMessage chatMessage) {
+        return chatMessage;
+    }
 
-        mav.setViewName("chat");
-        return mav;
+    @MessageMapping("/chat.addUser")
+    @SendTo("/topic/public")
+    public ChatMessage addUser(ChatMessage chatMessage) {
+        chatMessage.setType(ChatMessage.MessageType.JOIN);
+        return chatMessage;
     }
 }

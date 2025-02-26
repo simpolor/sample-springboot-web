@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js" integrity="sha512-hsqWiVBsPC5Hz9/hy5uQX6W6rEtBjtI8vyOAR4LAFpZAbQjJ43uIdmKsA7baQjM318sf8BBqrMkcWsfSsaWCNg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <h2>Chat Room</h2>
+    <div>
+        <label for="nickname">닉네임:</label>
+        <input type="text" id="nickname" placeholder="닉네임 입력" />
+        <button onclick="setNickname()">확인</button>
+    </div>
+
+    <div id="messageArea"></div>
+    <input type="text" id="message" placeholder="메시지를 입력하세요..." />
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        var roomId = '[[${roomId}]]';
+        var stompClient = null;
+        var nickname = sessionStorage.getItem("nickname") || "";
+
+        function connect() {
+            var socket = new SockJS('/ws');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                stompClient.subscribe('/topic/chat/' + roomId, function (message) {
+                    showMessage(JSON.parse(message.body));
+                });
+            });
+        }
+
+        function setNickname() {
+            var input = document.getElementById("nickname").value.trim();
+            if (input) {
+                nickname = input;
+                sessionStorage.setItem("nickname", nickname); // 닉네임 저장
+                document.getElementById("chatContainer").style.display = "block"; // 채팅창 보이기
+                document.getElementById("nickname").disabled = true; // 닉네임 수정 못하게
+            } else {
+                alert("닉네임을 입력해주세요!");
+            }
+        }
+
+        function sendMessage() {
+            var messageContent = document.getElementById("message").value.trim();
+            if (messageContent && stompClient && nickname) {
+                var chatMessage = {
+                    sender: nickname, // 닉네임 추가
+                    content: messageContent,
+                    type: "CHAT"
+                };
+                stompClient.send("/app/chat/" + roomId + "/sendMessage", {}, JSON.stringify(chatMessage));
+                document.getElementById("message").value = "";
+            } else if (!nickname) {
+                alert("닉네임을 먼저 입력해주세요!");
+            }
+        }
+
+        function showMessage(message) {
+            var messageArea = document.getElementById("messageArea");
+            var messageElement = document.createElement("div");
+            messageElement.innerText = message.sender + ": " + message.content;
+            messageArea.appendChild(messageElement);
+        }
+
+        window.onload = function() {
+            connect();
+            if (nickname) {
+                document.getElementById("nickname").value = nickname;
+                document.getElementById("nickname").disabled = true;
+                document.getElementById("chatContainer").style.display = "block";
+            }
+        };
+    </script>
+</body>
+</html>
